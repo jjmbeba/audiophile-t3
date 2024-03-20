@@ -1,11 +1,15 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
+  boolean,
   index,
+  integer,
+  json,
   pgTableCreator,
   serial,
+  text,
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
@@ -18,17 +22,43 @@ import {
  */
 export const createTable = pgTableCreator((name) => `audiophile_${name}`);
 
-export const posts = createTable(
-  "post",
+export const products = createTable(
+  "product",
   {
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 256 }),
+    newProduct: boolean("newProduct").default(false),
+    description: text("description").notNull(),
+    price: integer("price").notNull(),
+    features: text("features").notNull(),
+    imageUrl: text("imageUrl").notNull(),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updatedAt"),
   },
-  (example) => ({
-    nameIndex: index("name_idx").on(example.name),
-  })
+  (product) => ({
+    productIndex: index("product_idx").on(product.name),
+  }),
 );
+
+export const accessories = createTable("accessory", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 256 }),
+  quantity: integer("quantity").notNull(),
+  productID: integer("productID").references(() => products.id, {
+    onDelete: "cascade",
+    onUpdate: "cascade",
+  }),
+});
+
+export const productRelations = relations(products, ({ many }) => ({
+  accessories: many(accessories),
+}));
+
+export const accessoriesRelations = relations(accessories, ({ one }) => ({
+  product: one(products, {
+    fields: [accessories.productID],
+    references:[products.id]
+  }),
+}));
