@@ -7,6 +7,7 @@ import { Manrope } from "next/font/google";
 import { TRPCReactProvider } from "~/trpc/react";
 import { Metadata } from "next";
 import Navbar from "./_components/navbar/Navbar";
+import { Separator } from "~/components/ui/separator";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -37,6 +38,9 @@ export default function RootLayout({
         <body className={`font-sans ${manrope.variable}`}>
           <TRPCReactProvider>
             <Navbar />
+            <div className="bg-black">
+              <Separator className="bg-[#1b1b1b] md:mx-6 lg:mx-[10.3125rem]" />
+            </div>
             {children}
           </TRPCReactProvider>
         </body>

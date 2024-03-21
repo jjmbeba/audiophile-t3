@@ -45,9 +45,7 @@ const NavLink = ({ text, link }: NavLink) => {
 
   return (
     <Link
-      className={cn(
-        `nav-link ${pathname === link ? "text-primary" : "text-primary-foreground"}`,
-      )}
+      className={`hover:text-primary after:bg-primary relative after:absolute after:bottom-0 after:left-0 after:h-[0.125rem] after:w-full after:content-[''] ${pathname !== link ? "after:hidden" : ""} `}
       href={link}
     >
       {text}

@@ -103,15 +103,15 @@
 }
 
 @layer utilities {
-  .overline {
-    @apply text-primary text-[0.875rem] font-normal uppercase leading-[1.1875rem] tracking-[0.625rem];
+  .over-line {
+    @apply text-[0.875rem] font-normal uppercase leading-[1.1875rem] tracking-[0.625rem];
   }
 
   .sub-title {
-    @apply text-primary text-[0.8125rem] font-bold leading-[1.5625rem] tracking-[0.0625rem];
+    @apply text-primary text-[0.8125rem] font-bold uppercase leading-[1.5625rem] tracking-[0.0625rem];
   }
 
   .nav-link {
-    @apply text-[0.8125rem] font-bold leading-[1.5625rem] tracking-[0.125rem];
+    @apply hover:text-primary uppsercase text-[0.8125rem] font-bold leading-[1.5625rem] tracking-[0.125rem];
   }
 }
