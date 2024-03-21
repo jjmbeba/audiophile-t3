@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { cn } from "~/lib/utils";
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {}
+type Props =  React.HTMLAttributes<HTMLDivElement>
 
 const Logo = ({ className, ...props }: Props) => {
   return (
