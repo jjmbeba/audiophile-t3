@@ -4,8 +4,8 @@ import Logo from "../common/Logo";
 
 const MobileMenu = () => {
   return (
-    <div className="flex items-center space-x-[2.625rem]">
-      <Menu className="h-6 w-6" />
+    <div className="flex items-center gap-[2.625rem]">
+      <Menu className="h-6 w-6 lg:hidden" />
       <Logo className="hidden md:block" />
     </div>
   );
