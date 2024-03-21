@@ -7,6 +7,7 @@ const Hero = () => {
     <section className="relative pb-[7rem] text-center">
       <Image
         src={"/home/mobile/image-header.jpg"}
+        priority
         className="absolute -z-10"
         fill
         alt="hero-image"
