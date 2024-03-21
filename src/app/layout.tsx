@@ -12,6 +12,7 @@ import { Separator } from "~/components/ui/separator";
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight:['200','300','400','500','600','700']
 });
 
 export const metadata: Metadata = {
