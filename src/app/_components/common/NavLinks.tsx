@@ -1,7 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 import { cn } from "~/lib/utils";
-import { headers } from "next/headers";
+import { usePathname } from "next/navigation";
 
 type Props = React.HTMLAttributes<HTMLDivElement>;
 
@@ -40,12 +42,11 @@ type NavLink = {
 };
 
 const NavLink = ({ text, link }: NavLink) => {
-  const headersList = headers();
-  const pathname = headersList.get("next-url");
+  const pathname = usePathname();
 
   return (
     <Link
-      className={`hover:text-primary after:bg-primary relative after:absolute after:bottom-0 after:left-0 after:h-[0.125rem] after:w-full after:content-[''] ${pathname !== link ? "after:hidden" : ""} `}
+      className={`relative after:absolute after:bottom-0 after:left-0 after:h-[0.125rem] after:w-full after:origin-center after:scale-0 after:bg-primary after:duration-150 after:content-[''] hover:text-primary ${pathname == link ? "after:scale-100" : ""} `}
       href={link}
     >
       {text}
