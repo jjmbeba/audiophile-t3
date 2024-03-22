@@ -1,8 +1,6 @@
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import { AspectRatio } from "~/components/ui/aspect-ratio";
 
 type Category = {
   title: string;
