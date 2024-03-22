@@ -29,7 +29,7 @@ const Categories = () => {
   ];
 
   return (
-    <section className="mt-[5.75rem] flex flex-col gap-[4.25rem]">
+    <section className="mt-[5.75rem] flex flex-col gap-[4.25rem] md:w-full md:flex-row md:justify-between md:gap-[0.625rem] md:*:w-1/3">
       {categories.map((category) => (
         <CategoryCard key={category.title} {...category} />
       ))}

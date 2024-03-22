@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "~/components/ui/button";
 import HeroImage from "./HeroImage";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -19,8 +20,11 @@ const Hero = () => {
           for the passionate music enthusiast.
         </p>
       </div>
-      <Button className="mt-[2.1875rem] text-[0.8125rem] font-bold md:mt-[2.9375rem]">
-        See product
+      <Button
+        asChild
+        className="mt-[2.1875rem] text-[0.8125rem] font-bold md:mt-[2.9375rem]"
+      >
+        <Link href={"/headphones/xx99-mark-two-headphones"}>See product</Link>
       </Button>
     </section>
   );
