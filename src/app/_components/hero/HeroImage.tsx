@@ -31,7 +31,6 @@ const HeroImage = () => {
         ? "tablet"
         : "mobile";
 
-  console.log(screen);
   return (
     <Image
       src={`/home/${screen}/image-header.jpg`}

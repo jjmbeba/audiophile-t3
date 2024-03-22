@@ -108,7 +108,7 @@
   }
 
   .sub-title {
-    @apply text-primary text-[0.8125rem] font-bold uppercase leading-[1.5625rem] tracking-[0.0625rem];
+    @apply text-[0.8125rem] font-bold uppercase leading-[1.5625rem] tracking-[0.0625rem];
   }
 
   .nav-link {
