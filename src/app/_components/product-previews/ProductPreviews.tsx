@@ -1,33 +1,61 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 
 const ProductPreviews = () => {
+  function getWindowSize() {
+    const { innerWidth, innerHeight } = window;
+    return { innerWidth, innerHeight };
+  }
+
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
+  const screen =
+    windowSize.innerWidth >= 1024
+      ? "desktop"
+      : windowSize.innerWidth >= 768
+        ? "tablet"
+        : "mobile";
+
   return (
     <section className="mt-[7.5rem] flex flex-col gap-[1.5rem]">
-      <ZX9SpeakerPreview />
-      <ZX7SpeakerPreview />
-      <YX1EarphonesPreview />
+      <ZX9SpeakerPreview screen={screen} />
+      <ZX7SpeakerPreview screen={screen} />
+      <YX1EarphonesPreview screen={screen} />
     </section>
   );
 };
 
 export default ProductPreviews;
-const ZX9SpeakerPreview = () => {
+const ZX9SpeakerPreview = ({ screen }: { screen: string }) => {
   return (
     <div className="flex flex-col items-center rounded-[0.5rem] bg-primary pb-[3.4375rem]">
       <Image
-        src={"/home/mobile/image-speaker-zx9.png"}
+        src={`/home/${screen}/image-speaker-zx9.png`}
         width={172.25}
         height={207}
         alt="zx9-speaker"
         className="mt-[3.9375rem]"
       />
-      <p className="mt-[2.9375rem] px-[2.7175rem]  text-center text-[2.25rem] font-bold leading-[2.5rem] tracking-[0.080625rem] text-white">
+      <p className="mt-[2.9375rem] px-[2.7175rem]  text-center text-[2.25rem] font-bold leading-[2.5rem] tracking-[0.080625rem] text-white md:max-w-[16.3125rem]">
         ZX9 SPEAKER
       </p>
-      <p className=" mt-[2.3125rem] px-[1.7175rem] text-center text-[#f5ded2]">
+      <p className=" mt-[2.3125rem] px-[1.7175rem] text-center text-[#f5ded2] md:max-w-[21.8125rem]">
         Upgrade to premium speakers that are phenomenally built to deliver truly
         remarkable sound.
       </p>
@@ -41,11 +69,11 @@ const ZX9SpeakerPreview = () => {
   );
 };
 
-const ZX7SpeakerPreview = () => {
+const ZX7SpeakerPreview = ({ screen }: { screen: string }) => {
   return (
     <div className="relative rounded-[0.5rem] px-[1.625rem] py-[6.3125rem]">
       <Image
-        src={"/home/mobile/image-speaker-zx7.jpg"}
+        src={`/home/${screen}/image-speaker-zx7.jpg`}
         fill
         alt="zx7-speaker"
         className="-z-10 rounded-[0.5rem]"
@@ -61,18 +89,18 @@ const ZX7SpeakerPreview = () => {
   );
 };
 
-const YX1EarphonesPreview = () => {
+const YX1EarphonesPreview = ({ screen }: { screen: string }) => {
   return (
-    <div>
-      <div className="relative h-[12.5rem] w-full">
+    <div className="items-center gap-[0.6875rem] md:flex">
+      <div className="relative h-[12.5rem] w-full md:h-[20rem] md:w-1/2">
         <Image
-          src={"/home/mobile/image-earphones-yx1.jpg"}
+          src={`/home/${screen}/image-earphones-yx1.jpg`}
           fill
           alt="yx1-earphones"
           className="rounded-[0.5rem]"
         />
       </div>
-      <div className="mt-[1.5rem] rounded-[0.5rem] bg-[#f1f1f1] px-[1.625rem] pb-[2.5rem] pt-[3.1875rem]">
+      <div className="mt-[1.5rem] rounded-[0.5rem] bg-[#f1f1f1] px-[1.625rem] pb-[2.5rem] pt-[3.1875rem] md:mt-0 md:h-[20rem] md:w-1/2 md:pt-[6.9375rem]">
         <h4>YX1 EARPHONES</h4>
         <Button
           variant={"outline"}
