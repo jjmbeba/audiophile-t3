@@ -6,7 +6,7 @@ import { FacebookIcon, InstagramIcon, TwitterIcon } from "../socials/Icons";
 
 const Footer = () => {
   return (
-    <footer className="relative flex flex-col items-center bg-black px-6 pb-[2.375rem] pt-[3.625rem] text-white after:absolute after:left-1/2 after:top-0 after:h-[0.25rem] after:w-[6.3125rem] after:-translate-x-[50%] after:bg-primary after:content-['']  md:items-start  md:pb-[3.3125rem] md:pt-[3.8125rem] md:after:left-[2.4375rem] md:after:translate-x-0 lg:px-[10.3125rem]">
+    <footer className="relative flex flex-col items-center bg-black px-6 pb-[2.375rem] pt-[3.625rem] text-white after:absolute after:left-1/2 after:top-0 after:h-[0.25rem] after:w-[6.3125rem] after:-translate-x-[50%] after:bg-primary after:content-['']  md:items-start  md:pb-[3.3125rem] md:pt-[3.8125rem] md:after:left-[2.4375rem] md:after:translate-x-0 lg:px-[10.3125rem] lg:after:left-[10.3125rem]">
       <div className="items-center justify-between lg:flex lg:w-full">
         <Logo />
         <NavLinks className="mt-[3.4375rem] flex flex-col gap-[2rem] md:mt-[2.5rem] md:flex-row lg:mt-0" />
