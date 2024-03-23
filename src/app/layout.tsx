@@ -6,7 +6,7 @@ import { Manrope } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { Metadata } from "next";
-import Navbar from "./_components/navbar/Navbar";
+import Navbar from "./_components/home/navbar/Navbar";
 import { Separator } from "~/components/ui/separator";
 
 const manrope = Manrope({
