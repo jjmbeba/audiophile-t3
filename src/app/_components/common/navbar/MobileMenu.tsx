@@ -1,6 +1,6 @@
 import React from "react";
 import { Menu } from "lucide-react";
-import Logo from "../common/Logo";
+import Logo from "../Logo";
 
 const MobileMenu = () => {
   return (

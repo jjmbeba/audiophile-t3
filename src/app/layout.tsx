@@ -6,13 +6,14 @@ import { Manrope } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { Metadata } from "next";
-import Navbar from "./_components/home/navbar/Navbar";
+import Navbar from "./_components/common/navbar/Navbar";
 import { Separator } from "~/components/ui/separator";
+import Footer from "./_components/common/footer/Footer";
 
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-sans",
-  weight:['200','300','400','500','600','700']
+  weight: ["200", "300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -43,6 +44,7 @@ export default function RootLayout({
               <Separator className="bg-[#1b1b1b] md:mx-6 lg:mx-[10.3125rem]" />
             </div>
             {children}
+            <Footer/>
           </TRPCReactProvider>
         </body>
       </html>
