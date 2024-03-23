@@ -26,7 +26,7 @@ export const products = createTable(
   {
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 256 }),
-    newProduct: boolean("newProduct").default(false),
+    isNewProduct: boolean("isNewProduct").default(false),
     description: text("description").notNull(),
     price: integer("price").notNull(),
     category:text('category').notNull(),
