@@ -13,7 +13,7 @@ const Footer = () => {
       <div>
         <div className="mt-[3.9375rem] text-center text-[#878787]">
           <p>
-            Audiophile is an all in one stop to fulfill your audio needs. We're
+            Audiophile is an all in one stop to fulfill your audio needs. We&apos;re
             a small team of music lovers and sound specialists who are devoted
             to helping you get the most out of personal audio. Come and visit
             our demo facility - we&apos;re open 7 days a week.
@@ -47,7 +47,7 @@ const SocialLinks = () => {
   return (
     <div className="mt-[3.4375rem] flex items-center justify-center gap-4">
       {socialsIcons.map(({ title, imageUrl }) => (
-        <div className="relative h-[1.5rem] w-[1.5rem]">
+        <div key={title} className="relative h-[1.5rem] w-[1.5rem]">
           <Image src={imageUrl} fill alt={title} />
         </div>
       ))}

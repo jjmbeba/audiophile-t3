@@ -6,7 +6,6 @@ import {
   boolean,
   index,
   integer,
-  json,
   pgTableCreator,
   serial,
   text,
@@ -59,6 +58,6 @@ export const productRelations = relations(products, ({ many }) => ({
 export const accessoriesRelations = relations(accessories, ({ one }) => ({
   product: one(products, {
     fields: [accessories.productID],
-    references:[products.id]
+    references: [products.id],
   }),
 }));

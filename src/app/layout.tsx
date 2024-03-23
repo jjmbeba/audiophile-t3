@@ -1,14 +1,14 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 import "~/styles/globals.css";
-import { dark, neobrutalism } from "@clerk/themes";
 
 import { Manrope } from "next/font/google";
 
-import { TRPCReactProvider } from "~/trpc/react";
 import { Metadata } from "next";
-import Navbar from "./_components/common/navbar/Navbar";
 import { Separator } from "~/components/ui/separator";
+import { TRPCReactProvider } from "~/trpc/react";
 import Footer from "./_components/common/footer/Footer";
+import Navbar from "./_components/common/navbar/Navbar";
 
 const manrope = Manrope({
   subsets: ["latin"],

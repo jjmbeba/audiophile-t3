@@ -1,8 +1,6 @@
-import Image from "next/image";
-import React from "react";
+import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import HeroImage from "./HeroImage";
-import Link from "next/link";
 
 const Hero = () => {
   return (
