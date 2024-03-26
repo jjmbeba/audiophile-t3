@@ -6,6 +6,7 @@ import {
   boolean,
   index,
   integer,
+  json,
   pgTableCreator,
   serial,
   text,
@@ -29,9 +30,10 @@ export const products = createTable(
     isNewProduct: boolean("isNewProduct").default(false),
     description: text("description").notNull(),
     price: integer("price").notNull(),
-    category:text('category').notNull(),
+    category: text("category").notNull(),
     features: text("features").notNull(),
-    imageUrl: text("imageUrl").notNull(),
+    images: json("images").notNull(),
+    categoryImages: json("categoryImages").notNull(),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
@@ -44,7 +46,7 @@ export const products = createTable(
 
 export const accessories = createTable("accessory", {
   id: serial("id").primaryKey(),
-  name: varchar("name", { length: 256 }),
+  item: varchar("name", { length: 256 }),
   quantity: integer("quantity").notNull(),
   productID: integer("productID").references(() => products.id, {
     onDelete: "cascade",

@@ -1,7 +1,5 @@
-import React from "react";
 import Logo from "../Logo";
 import NavLinks from "../NavLinks";
-import Image from "next/image";
 import { FacebookIcon, InstagramIcon, TwitterIcon } from "../socials/Icons";
 
 const Footer = () => {
