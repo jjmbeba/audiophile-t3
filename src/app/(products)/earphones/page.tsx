@@ -17,7 +17,7 @@ const page = async () => {
   return (
     <>
       <Banner />
-      <main className="mt-16 *:mx-[1.625rem] md:mt-[3.5rem] lg:*:mx-[10.3125rem]">
+      <main className="mt-16 *:px-[1.625rem] md:mt-[3.5rem] lg:*:px-[10.3125rem]">
         <GoBackButton />
         <div className="flex flex-col items-center gap-[7.5rem]">
           {earphones.map((earphone) => {
@@ -43,7 +43,7 @@ const page = async () => {
 
 const Banner = () => {
   return (
-    <h4 className="w-full bg-black py-[2.625rem] text-center text-white md:py-[7.0625rem]">
+    <h4 className="w-full bg-black py-[2.625rem] text-center text-white md:py-[3.625rem]">
       EARPHONES
     </h4>
   );
