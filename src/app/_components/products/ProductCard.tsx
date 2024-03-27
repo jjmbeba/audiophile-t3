@@ -24,11 +24,17 @@ const ProductCard = ({
     <div className="flex flex-col items-center *:text-center">
       <ProductCardImage images={images} name={name!} />
       {isNewProduct && (
-        <p className="over-line mt-[2.3125rem] text-primary">NEW PRODUCT</p>
+        <p className="over-line mt-[2.3125rem] text-primary md:mt-[3.5625rem]">
+          NEW PRODUCT
+        </p>
       )}
-      <h4 className="mt-[2.375rem]">{name}</h4>
-      <p className="mt-[2.4375rem] text-[#7d7d7d]">{description}</p>
-      <Button className="mt-[1.9375rem]">
+      <h4 className="mt-[2.375rem] max-w-[35.75rem] font-bold uppercase md:mt-[1.75rem] md:max-w-[19.0625rem] md:text-[2.5rem] md:leading-[2.75rem] md:tracking-[0.09375rem]">
+        {name}
+      </h4>
+      <p className="mt-[2.4375rem] text-[#7d7d7d] md:mt-[2.875rem] md:max-w-[35.75rem]">
+        {description}
+      </p>
+      <Button className="mt-[1.9375rem] md:mt-[1.6875rem]">
         <Link href={`${category}/${name}`}>SEE PRODUCT</Link>
       </Button>
     </div>

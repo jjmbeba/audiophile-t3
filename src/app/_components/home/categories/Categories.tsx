@@ -1,6 +1,8 @@
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { DetailedHTMLProps, HTMLAttributes } from "react";
+import { cn } from "~/lib/utils";
 
 type Category = {
   title: string;
@@ -8,7 +10,9 @@ type Category = {
   imageUrl: string;
 };
 
-const Categories = () => {
+type Props = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
+
+const Categories = ({ className, ...props }: Props) => {
   const categories: Category[] = [
     {
       title: "HEADPHONES",
@@ -28,7 +32,7 @@ const Categories = () => {
   ];
 
   return (
-    <section className="mt-[5.75rem] flex flex-col gap-[4.25rem] md:w-full md:flex-row md:justify-between md:gap-[0.625rem] md:*:w-1/3">
+    <section {...props} className={cn("mt-[5.75rem] flex flex-col gap-[4.25rem] md:w-full md:flex-row md:justify-between md:gap-[0.625rem] md:*:w-1/3", className)}>
       {categories.map((category) => (
         <CategoryCard key={category.title} {...category} />
       ))}
