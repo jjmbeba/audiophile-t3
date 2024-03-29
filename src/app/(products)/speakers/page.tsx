@@ -3,13 +3,15 @@ import ProductList from "~/app/_components/products/ProductList";
 import { api } from "~/trpc/server";
 
 export const metadata: Metadata = {
-  title: "Earphones",
+  title: "Speakers",
 };
 
 const page = async () => {
-  const earphones = await api.product.getEarphones();
+  const speakers = await api.product.getSpeakers();
 
-  return <ProductList productData={earphones} bannerTitle="EARPHONES" />;
+  return <ProductList productData={speakers} bannerTitle="SPEAKERS" />;
 };
+
+
 
 export default page;
