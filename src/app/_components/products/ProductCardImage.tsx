@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { AspectRatio } from "~/components/ui/aspect-ratio";
 
 type Props = {
   images: {
@@ -40,7 +41,7 @@ const ProductCardImage = ({ images, name }: Props) => {
         : "mobile";
 
   return (
-    <div className="relative h-[22rem] w-[20.4375rem] md:h-[46.35474rem] md:w-[43.0625rem]">
+    <div className="relative h-[22rem] w-[20.4375rem] md:h-[46.35474rem] md:w-[43.0625rem] lg:h-[35rem] lg:w-[31.75rem]">
       <Image
         src={images[screen]}
         fill

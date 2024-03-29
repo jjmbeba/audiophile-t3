@@ -21,9 +21,9 @@ const ProductCard = ({
   category,
 }: Product) => {
   return (
-    <div className="flex flex-col items-center *:text-center">
+    <div className="flex flex-col items-center *:text-center md:*:text-left lg:flex-row lg:gap-[8rem]">
       <ProductCardImage images={images} name={name!} />
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center lg:items-start">
         {isNewProduct && (
           <p className="over-line mt-[2.3125rem] text-primary md:mt-[3.5625rem]">
             NEW PRODUCT
