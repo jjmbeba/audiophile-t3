@@ -32,6 +32,7 @@ export const products = createTable(
     price: integer("price").notNull(),
     category: text("category").notNull(),
     features: text("features").notNull(),
+    slug:text('slug').notNull().default(""),
     images: json("images").notNull(),
     categoryImages: json("categoryImages").notNull(),
     createdAt: timestamp("created_at")
