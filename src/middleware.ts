@@ -5,7 +5,15 @@ import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
   // Allow signed out users to access the specified routes:
-  publicRoutes: ["/", "/earphones", "/headphones", "/speakers"],
+  publicRoutes: [
+    "/",
+    "/earphones",
+    "/earphones/:id",
+    "/headphones",
+    "/headphones/:id",
+    "/speakers",
+    "/speakers/:id",
+  ],
   // Prevent the specified routes from accessing
   // authentication information:
   // ignoredRoutes: ['/no-auth-in-this-route'],

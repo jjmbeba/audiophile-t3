@@ -1,4 +1,5 @@
 import { eq } from "drizzle-orm";
+import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { products } from "~/server/db/schema";
@@ -21,4 +22,12 @@ export const productRouter = createTRPCRouter({
       where: eq(products.category, "speakers"),
     });
   }),
+
+  getProduct: publicProcedure
+    .input(z.string())
+    .query(async ({ input: slug, ctx }) => {
+      return ctx.db.query.products.findFirst({
+        where: eq(products.slug, slug),
+      });
+    }),
 });

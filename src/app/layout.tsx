@@ -37,14 +37,14 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <body className={`font-sans ${manrope.variable}`}>
+        <body className={`font-sans ${manrope.variable} h-screen`}>
           <TRPCReactProvider>
             <Navbar />
             <div className="bg-black">
               <Separator className="bg-[#1b1b1b] md:mx-6 lg:mx-[10.3125rem]" />
             </div>
             {children}
-            <Footer/>
+            <Footer />
           </TRPCReactProvider>
         </body>
       </html>

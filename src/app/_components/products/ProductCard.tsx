@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import { RouterOutputs } from "~/trpc/react";
-import ProductCardImage from "./ProductCardImage";
+import ProductImage from "./ProductImage";
 
 export type Props = RouterOutputs["product"]["getEarphones"][number];
 
@@ -18,11 +18,12 @@ const ProductCard = ({
   isNewProduct,
   name,
   description,
+  slug,
   category,
 }: Product) => {
   return (
     <div className="flex flex-col items-center *:text-center md:*:text-left lg:flex-row lg:gap-[8rem] lg:even:flex-row-reverse">
-      <ProductCardImage images={images} name={name!} />
+      <ProductImage images={images} name={name!} />
       <div className="flex flex-col items-center lg:items-start">
         {isNewProduct && (
           <p className="over-line mt-[2.3125rem] text-primary md:mt-[3.5625rem]">
@@ -36,7 +37,7 @@ const ProductCard = ({
           {description}
         </p>
         <Button className="mt-[1.9375rem] md:mt-[1.6875rem]">
-          <Link href={`${category}/${name}`}>SEE PRODUCT</Link>
+          <Link href={`${category}/${slug}`}>SEE PRODUCT</Link>
         </Button>
       </div>
     </div>
