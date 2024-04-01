@@ -1,16 +1,10 @@
 import { Metadata, ResolvingMetadata } from "next";
-import React from "react";
 import { z } from "zod";
-import Banner from "~/app/_components/common/Banner";
-import GoBackButton from "~/app/_components/common/GoBackButton";
-import Categories from "~/app/_components/home/categories/Categories";
-import CTA from "~/app/_components/home/cta/CTA";
 import ProductDetail from "~/app/_components/products/ProductDetail";
 import { api } from "~/trpc/server";
 
 type Props = {
   params: { slug: string };
-  bannerTitle: string;
 };
 
 export async function generateMetadata(
@@ -19,17 +13,15 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   // read route params
   const slug = params.slug;
-
   const product = await api.product.getProduct(slug);
-
   return {
     title: product?.name,
   };
 }
-const page = async ({ params }: Props) => {
-  const product = await api.product.getProduct(params.slug);
 
-  if (!product)return;
+const Page = async ({ params }: Props) => {
+  const product = await api.product.getProduct(params.slug);
+  if (!product) return null; // or a fallback component
 
   const images = z
     .object({
@@ -41,4 +33,5 @@ const page = async ({ params }: Props) => {
 
   return <ProductDetail bannerTitle="SPEAKERS" {...product} images={images} />;
 };
-export default page;
+
+export default Page;
