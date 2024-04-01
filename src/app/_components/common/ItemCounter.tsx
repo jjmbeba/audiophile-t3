@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "~/components/ui/button";
 import { useCartStore } from "~/store/cartStore";
 
@@ -61,6 +62,7 @@ const ItemCounter = ({ id, image, name, price }: Props) => {
             });
 
             updateProducts(updatedProducts);
+            toast.success(`${name} quantity updated successfully`);
           } else {
             addProduct({
               id,
@@ -69,6 +71,8 @@ const ItemCounter = ({ id, image, name, price }: Props) => {
               quantity: count,
               price,
             });
+
+            toast.success(`${name} added to cart`);
           }
         }}
       >

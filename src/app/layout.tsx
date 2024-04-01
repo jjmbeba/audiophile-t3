@@ -9,6 +9,7 @@ import { Separator } from "~/components/ui/separator";
 import { TRPCReactProvider } from "~/trpc/react";
 import Footer from "./_components/common/footer/Footer";
 import Navbar from "./_components/common/navbar/Navbar";
+import { Toaster } from "~/components/ui/sonner";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ export default function RootLayout({
               <Separator className="bg-[#1b1b1b] md:mx-6 lg:mx-[10.3125rem]" />
             </div>
             {children}
+            <Toaster richColors />
             <Footer />
           </TRPCReactProvider>
         </body>
