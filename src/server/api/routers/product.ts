@@ -28,6 +28,9 @@ export const productRouter = createTRPCRouter({
     .query(async ({ input: slug, ctx }) => {
       return ctx.db.query.products.findFirst({
         where: eq(products.slug, slug),
+        with: {
+          accessories: true,
+        },
       });
     }),
 });

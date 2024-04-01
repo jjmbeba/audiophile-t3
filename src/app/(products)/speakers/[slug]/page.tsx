@@ -23,6 +23,8 @@ const Page = async ({ params }: Props) => {
   const product = await api.product.getProduct(params.slug);
   if (!product) return null; // or a fallback component
 
+  console.log(product);
+
   const images = z
     .object({
       tablet: z.string(),
@@ -31,7 +33,16 @@ const Page = async ({ params }: Props) => {
     })
     .parse(product.images);
 
-  return <ProductDetail bannerTitle="SPEAKERS" {...product} images={images} />;
+  const accessories = z
+    .object({
+      id: z.number(),
+      item: z.string(),
+      quantity: z.number(),
+      productID: z.number(),
+    }).array()
+    .parse(product.accessories);
+
+  return <ProductDetail bannerTitle="SPEAKERS" {...product} accessories={accessories} images={images} />;
 };
 
 export default Page;

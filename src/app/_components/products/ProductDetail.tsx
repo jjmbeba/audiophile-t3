@@ -6,8 +6,16 @@ import CTA from "../home/cta/CTA";
 import { Product } from "./ProductCard";
 import ProductImage from "./ProductImage";
 
+type ProductAccessory = {
+  id: number;
+  item: string;
+  quantity: number;
+  productID: number;
+};
+
 interface Props extends Product {
   bannerTitle: string;
+  accessories: ProductAccessory[];
 }
 
 const ProductDetail = ({ bannerTitle, ...props }: Props) => {
@@ -30,12 +38,12 @@ const ProductDetailCard = ({
   isNewProduct,
   name,
   description,
-  slug,
   price,
-  category,
-}: Product) => {
-  console.log(name);
-
+  features,
+  accessories,
+}: Product & {
+  accessories: ProductAccessory[];
+}) => {
   return (
     <div>
       <ProductImage images={images} name={name!} />
@@ -55,6 +63,45 @@ const ProductDetailCard = ({
           ${price.toLocaleString()}
         </h6>
         <ItemCounter id={id} name={name!} price={price} image={images.mobile} />
+      </div>
+      <ProductFeatures features={features} />
+      <ProductAccessories accessories={accessories} />
+      <div className="mt-[5.6875rem] flex flex-col gap-[1.25rem] *:rounded-[0.5rem] *:bg-[#f1f1f1]">
+        <div className="h-[10.875rem] w-[20.4375rem]"></div>
+        <div className="h-[10.875rem] w-[20.4375rem]"></div>
+        <div className="h-[23rem] w-[20.4375rem]"></div>
+      </div>
+    </div>
+  );
+};
+
+const ProductFeatures = ({ features }: { features: string }) => {
+  return (
+    <div className="mt-[6rem]">
+      <h5>FEATURES</h5>
+      <p className="mt-[2.6875rem] text-[#7d7d7d]">{features}</p>
+    </div>
+  );
+};
+
+const ProductAccessories = ({
+  accessories,
+}: {
+  accessories: ProductAccessory[];
+}) => {
+  return (
+    <div className="mt-[6rem]">
+      <h5>IN THE BOX</h5>
+      <div className="mt-[2.6875rem] text-[#7d7d7d]">
+        {accessories.map(({ id, item, quantity }) => (
+          <div
+            key={id}
+            className="flex items-center justify-start gap-[1.5625rem]"
+          >
+            <p className="font-bold text-primary">{quantity}x</p>
+            <p className="text-[#7d7d7d]">{item}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

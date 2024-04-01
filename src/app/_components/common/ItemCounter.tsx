@@ -72,7 +72,7 @@ const ItemCounter = ({ id, image, name, price }: Props) => {
               price,
             });
 
-            toast.success(`${name} added to cart`);
+            toast.success(`${count} ${name} added to cart`);
           }
         }}
       >
