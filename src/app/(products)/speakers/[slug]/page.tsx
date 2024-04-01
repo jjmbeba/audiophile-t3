@@ -10,6 +10,7 @@ import { api } from "~/trpc/server";
 
 type Props = {
   params: { slug: string };
+  bannerTitle: string;
 };
 
 export async function generateMetadata(
@@ -25,12 +26,7 @@ export async function generateMetadata(
     title: product?.name,
   };
 }
-
-interface ProductProps extends Props {
-  bannerTitle: string;
-}
-
-const page = async ({ params }: ProductProps) => {
+const page = async ({ params }: Props) => {
   const product = await api.product.getProduct(params.slug);
 
   if (!product)return;
