@@ -1,10 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "~/components/ui/button";
+import { useCartStore } from "~/store/cartStore";
 
-const ItemCounter = () => {
+type Props = {
+  name: string;
+  price: number;
+  image: string;
+  id: number;
+};
+
+const ItemCounter = ({ id, image, name, price }: Props) => {
   const [count, setCount] = useState(1);
+
+  const [cart, updateProducts, addProduct] = useCartStore((state) => [
+    state.cart,
+    state.updateProducts,
+    state.addProduct,
+  ]);
+
+  console.log(cart);
 
   return (
     <div className="mt-[2.3125rem] flex items-center gap-[1rem]">
@@ -28,7 +44,36 @@ const ItemCounter = () => {
           +
         </Button>
       </div>
-      <Button>ADD TO CART</Button>
+      <Button
+        onClick={() => {
+          const foundProduct = cart.find((product) => product.id === id);
+
+          if (foundProduct) {
+            const updatedProducts = cart.map((product) => {
+              if (product.id === id) {
+                return {
+                  ...product,
+                  quantity: product.quantity + count,
+                };
+              } else {
+                return product;
+              }
+            });
+
+            updateProducts(updatedProducts);
+          } else {
+            addProduct({
+              id,
+              name,
+              image,
+              quantity: count,
+              price,
+            });
+          }
+        }}
+      >
+        ADD TO CART
+      </Button>
     </div>
   );
 };

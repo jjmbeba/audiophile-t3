@@ -1,12 +1,10 @@
-import { z } from "zod";
 import Banner from "../common/Banner";
 import GoBackButton from "../common/GoBackButton";
+import ItemCounter from "../common/ItemCounter";
 import Categories from "../home/categories/Categories";
 import CTA from "../home/cta/CTA";
 import { Product } from "./ProductCard";
 import ProductImage from "./ProductImage";
-import { Button } from "~/components/ui/button";
-import ItemCounter from "../common/ItemCounter";
 
 interface Props extends Product {
   bannerTitle: string;
@@ -27,6 +25,7 @@ const ProductDetail = ({ bannerTitle, ...props }: Props) => {
 };
 
 const ProductDetailCard = ({
+  id,
   images,
   isNewProduct,
   name,
@@ -55,7 +54,7 @@ const ProductDetailCard = ({
         <h6 className="mt-[2rem] md:mt-[3.5625rem]">
           ${price.toLocaleString()}
         </h6>
-        <ItemCounter />
+        <ItemCounter id={id} name={name!} price={price} image={images.mobile} />
       </div>
     </div>
   );
