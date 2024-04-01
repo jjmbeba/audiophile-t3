@@ -67,9 +67,9 @@ const ProductDetailCard = ({
       <ProductFeatures features={features} />
       <ProductAccessories accessories={accessories} />
       <div className="mt-[5.6875rem] flex flex-col gap-[1.25rem] *:rounded-[0.5rem] *:bg-[#f1f1f1]">
-        <div className="h-[10.875rem] w-[20.4375rem]"></div>
-        <div className="h-[10.875rem] w-[20.4375rem]"></div>
-        <div className="h-[23rem] w-[20.4375rem]"></div>
+        <div className="h-[10.875rem] w-full"></div>
+        <div className="h-[10.875rem] w-full"></div>
+        <div className="h-[23rem] w-full"></div>
       </div>
     </div>
   );
