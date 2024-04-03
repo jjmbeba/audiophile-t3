@@ -33,6 +33,14 @@ const Page = async ({ params }: Props) => {
     })
     .parse(product.images);
 
+  const relatedImages = z
+    .object({
+      first: z.string(),
+      second: z.string(),
+      third: z.string(),
+    })
+    .parse(product.relatedImages);
+
   const accessories = z
     .object({
       id: z.number(),
@@ -42,7 +50,7 @@ const Page = async ({ params }: Props) => {
     }).array()
     .parse(product.accessories);
 
-  return <ProductDetail bannerTitle="SPEAKERS" {...product} accessories={accessories} images={images} />;
+  return <ProductDetail bannerTitle="SPEAKERS" {...product} accessories={accessories} images={images} relatedImages={relatedImages}/>;
 };
 
 export default Page;

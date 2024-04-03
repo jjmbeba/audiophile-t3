@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Banner from "../common/Banner";
 import GoBackButton from "../common/GoBackButton";
 import ItemCounter from "../common/ItemCounter";
@@ -41,6 +42,7 @@ const ProductDetailCard = ({
   price,
   features,
   accessories,
+  relatedImages,
 }: Product & {
   accessories: ProductAccessory[];
 }) => {
@@ -66,10 +68,31 @@ const ProductDetailCard = ({
       </div>
       <ProductFeatures features={features} />
       <ProductAccessories accessories={accessories} />
-      <div className="mt-[5.6875rem] flex flex-col gap-[1.25rem] *:rounded-[0.5rem] *:bg-[#f1f1f1]">
-        <div className="h-[10.875rem] w-full"></div>
-        <div className="h-[10.875rem] w-full"></div>
-        <div className="h-[23rem] w-full"></div>
+      <div className="mt-[5.6875rem] flex flex-col gap-[1.25rem] *:rounded-[0.5rem]">
+        <div className="relative h-[10.875rem] w-full">
+          <Image
+            src={relatedImages.first}
+            className="rounded-[0.5rem]"
+            fill
+            alt="image-gallery-2"
+          />
+        </div>
+        <div className="relative h-[10.875rem] w-full">
+          <Image
+            src={relatedImages.second}
+            className="rounded-[0.5rem]"
+            fill
+            alt="image-gallery-2"
+          />
+        </div>
+        <div className="relative h-[23rem] w-full">
+          <Image
+            src={relatedImages.third}
+            className="rounded-[0.5rem]"
+            fill
+            alt="image-gallery-3"
+          />
+        </div>
       </div>
     </div>
   );

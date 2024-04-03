@@ -34,6 +34,7 @@ export const products = createTable(
     features: text("features").notNull(),
     slug:text('slug').notNull().default(""),
     images: json("images").notNull(),
+    relatedImages:json("relatedImages"),
     categoryImages: json("categoryImages").notNull(),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
