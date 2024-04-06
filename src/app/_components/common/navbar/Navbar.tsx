@@ -4,6 +4,7 @@ import NavLinks from "../NavLinks";
 import Cart from "./Cart";
 import MobileMenu from "./MobileMenu";
 import User from "./User";
+import Link from "next/link";
 
 const Navbar = async () => {
   const user = await currentUser();
@@ -13,7 +14,13 @@ const Navbar = async () => {
       <MobileMenu />
       <Logo className="md:hidden" />
       <NavLinks className="hidden lg:flex" />
-      {user?.id ? <Cart /> : <User />}
+      {user?.id ? (
+        <Cart />
+      ) : (
+        <Link href={'/signup'}>
+          <User />
+        </Link>
+      )}
     </div>
   );
 };
