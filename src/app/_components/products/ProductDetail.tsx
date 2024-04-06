@@ -94,8 +94,10 @@ const ProductDetailCard = ({
           />
         </div>
       </div>
-      <ProductFeatures features={features} />
-      <ProductAccessories accessories={accessories} />
+      <div className="lg:flex justify-between">
+        <ProductFeatures features={features} />
+        <ProductAccessories accessories={accessories} />
+      </div>
       <ExtraProductImages relatedImages={relatedImages} />
       <ProductRecommendations recommendations={seeMoreLinks} />
     </div>
@@ -104,7 +106,7 @@ const ProductDetailCard = ({
 
 const ProductFeatures = ({ features }: { features: string }) => {
   return (
-    <div className="mt-[6rem]">
+    <div className="mt-[6rem] lg:max-w-[39.6875rem]">
       <h5>FEATURES</h5>
       <p className="mt-[2.6875rem] text-[#7d7d7d]">{features}</p>
     </div>
@@ -117,7 +119,7 @@ const ProductAccessories = ({
   accessories: ProductAccessory[];
 }) => {
   return (
-    <div className="mt-[6rem] items-start gap-[10.6875rem] md:flex">
+    <div className="mt-[6rem] items-start gap-[10.6875rem] md:flex lg:flex-col lg:gap-[2.8125rem]">
       <h5>IN THE BOX</h5>
       <div className="mt-[2.6875rem] text-[#7d7d7d] md:mt-0">
         {accessories.map(({ id, item, quantity }) => (
@@ -145,7 +147,7 @@ const ExtraProductImages = ({
 }) => {
   return (
     <div className="mt-[5.6875rem] flex flex-col gap-[1.25rem] *:rounded-[0.5rem] md:flex-row">
-      <div className="flex flex-col gap-[1.25rem] *:relative *:h-[10.875rem] *:w-full md:*:h-[10.875rem] md:*:w-[17.3125rem]">
+      <div className="flex flex-col gap-[1.25rem] *:relative *:h-[10.875rem] *:w-full md:*:h-[10.875rem] md:*:w-[17.3125rem] lg:*:h-[17.5rem] lg:*:w-[27.8125rem]">
         <div className="">
           <Image
             src={relatedImages.first}
@@ -163,7 +165,7 @@ const ExtraProductImages = ({
           />
         </div>
       </div>
-      <div className="relative h-[23rem] w-full">
+      <div className="relative h-[23rem] w-full lg:h-[36.25rem] lg:w-[39.6875rem]">
         <Image
           src={relatedImages.third}
           className="rounded-[0.5rem]"
@@ -205,7 +207,7 @@ md:gap-[0.6875rem]"
 const RecommendationCard = ({ name, slug, category }: RecommendationOutput) => {
   return (
     <div className="flex flex-col items-center *:text-center">
-      <div className="relative h-[7.5rem] w-[20.4375rem] rounded-[0.5rem] bg-gray-600 md:h-[19.875rem] md:w-[13.9375rem]" />
+      <div className="relative h-[7.5rem] w-[20.4375rem] rounded-[0.5rem] bg-gray-600 md:h-[19.875rem] md:w-[13.9375rem] lg:h-[19.875rem] lg:w-[21.875rem]" />
       <h5 className="mt-[2.5rem]">{name}</h5>
       <Button asChild className="mt-[2rem]">
         <Link href={`${category}/${slug}`}>SEE PRODUCT</Link>
