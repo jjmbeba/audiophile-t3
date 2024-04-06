@@ -35,7 +35,7 @@ const ProductList = ({ productData, bannerTitle }: ProductData) => {
               }).parse(product.relatedImages)
 
             return (
-              <ProductCard key={product.id} {...product} images={images} relatedImages={relatedImages} />
+              <ProductCard key={product.id} {...product} images={images} relatedImages={relatedImages}/>
             );
           })}
         </div>

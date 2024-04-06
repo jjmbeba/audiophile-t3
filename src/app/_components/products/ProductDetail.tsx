@@ -1,4 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "~/components/ui/button";
+import { RouterOutputs } from "~/trpc/react";
+import { api } from "~/trpc/server";
 import Banner from "../common/Banner";
 import GoBackButton from "../common/GoBackButton";
 import ItemCounter from "../common/ItemCounter";
@@ -6,11 +10,6 @@ import Categories from "../home/categories/Categories";
 import CTA from "../home/cta/CTA";
 import { Product } from "./ProductCard";
 import ProductImage from "./ProductImage";
-import { api } from "~/trpc/server";
-import { RouterOutputs } from "~/trpc/react";
-import { z } from "zod";
-import { Button } from "~/components/ui/button";
-import Link from "next/link";
 
 type ProductAccessory = {
   id: number;
@@ -28,19 +27,24 @@ type ProductRecommendation = {
 interface Props extends Product {
   bannerTitle: string;
   accessories: ProductAccessory[];
-  recommendations: ProductRecommendation[];
+  seeMoreLinks:ProductRecommendation[];
 }
 
-type RecommendationOutput =
-  RouterOutputs["product"]["getProductRecommendations"][number];
+type RecommendationOutput = {
+  id: number;
+  name: string | null;
+  category: string;
+  slug: string;
+  images: unknown;
+};
 
-const ProductDetail = ({ bannerTitle, recommendations, ...props }: Props) => {
+const ProductDetail = ({ bannerTitle, ...props }: Props) => {
   return (
     <>
       <Banner title={bannerTitle} />
       <main className="mt-8 *:px-[1.625rem] md:mt-[3.5rem] lg:*:px-[10.3125rem]">
         <GoBackButton />
-        <ProductDetailCard {...props} recommendations={recommendations} />
+        <ProductDetailCard {...props} />
         <Categories className="mt-[10.75rem]" />
         <CTA />
       </main>
@@ -58,12 +62,11 @@ const ProductDetailCard = ({
   features,
   accessories,
   relatedImages,
-  recommendations,
+  seeMoreLinks,
 }: Product & {
   accessories: ProductAccessory[];
-  recommendations: ProductRecommendation[];
+  seeMoreLinks: ProductRecommendation[];
 }) => {
-
   return (
     <div>
       <ProductImage images={images} name={name!} />
@@ -87,7 +90,7 @@ const ProductDetailCard = ({
       <ProductFeatures features={features} />
       <ProductAccessories accessories={accessories} />
       <ExtraProductImages relatedImages={relatedImages} />
-      <ProductRecommendations recommendations={recommendations} />
+      <ProductRecommendations recommendations={seeMoreLinks} />
     </div>
   );
 };
@@ -179,7 +182,7 @@ const ProductRecommendations = async ({
           if (!recommendation) return;
 
           return (
-            <RecommendationCard key={recommendation.id} {...recommendation!} />
+            <RecommendationCard key={recommendation.id} {...recommendation} />
           );
         })}
       </div>
@@ -187,15 +190,13 @@ const ProductRecommendations = async ({
   );
 };
 
-const RecommendationCard = (recommendation: RecommendationOutput) => {
-  if (!recommendation) return;
-
+const RecommendationCard = ({name, slug, category}:RecommendationOutput) => {
   return (
     <div className="flex flex-col items-center *:text-center">
       <div className="relative h-[7.5rem] w-[20.4375rem] rounded-[0.5rem] bg-gray-600"/>
-      <h5 className="mt-[2.5rem]">{recommendation.name}</h5>
+      <h5 className="mt-[2.5rem]">{name}</h5>
       <Button asChild className="mt-[2rem]">
-        <Link href={`${recommendation.category}/${recommendation.slug}`}>
+        <Link href={`${category}/${slug}`}>
           SEE PRODUCT
         </Link>
       </Button>
