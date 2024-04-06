@@ -1,4 +1,4 @@
-import { Metadata, ResolvingMetadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { z } from "zod";
 import ProductDetail from "~/app/_components/products/ProductDetail";
 import { api } from "~/trpc/server";

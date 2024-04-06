@@ -197,13 +197,13 @@ const ProductRecommendations = async ({
 const RecommendationCard = (recommendation: RecommendationOutput) => {
   if (!recommendation) return;
 
-  const images = z
-    .object({
-      tablet: z.string(),
-      desktop: z.string(),
-      mobile: z.string(),
-    })
-    .parse(recommendation.images);
+  // const images = z
+  //   .object({
+  //     tablet: z.string(),
+  //     desktop: z.string(),
+  //     mobile: z.string(),
+  //   })
+  //   .parse(recommendation.images);
 
   return (
     <div className="flex flex-col items-center *:text-center">

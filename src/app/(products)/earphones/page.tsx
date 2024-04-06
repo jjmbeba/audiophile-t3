@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { type Metadata } from "next";
 import ProductList from "~/app/_components/products/ProductList";
 import { api } from "~/trpc/server";
 
