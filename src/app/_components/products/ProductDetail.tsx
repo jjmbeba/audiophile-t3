@@ -63,13 +63,6 @@ const ProductDetailCard = ({
   accessories: ProductAccessory[];
   recommendations: ProductRecommendation[];
 }) => {
-  const otherImages = z
-    .object({
-      first: z.string(),
-      second: z.string(),
-      third: z.string(),
-    })
-    .parse(relatedImages);
 
   return (
     <div>
@@ -93,7 +86,7 @@ const ProductDetailCard = ({
       </div>
       <ProductFeatures features={features} />
       <ProductAccessories accessories={accessories} />
-      <ExtraProductImages relatedImages={otherImages} />
+      <ExtraProductImages relatedImages={relatedImages} />
       <ProductRecommendations recommendations={recommendations} />
     </div>
   );
