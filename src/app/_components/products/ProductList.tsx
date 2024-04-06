@@ -28,8 +28,14 @@ const ProductList = ({ productData, bannerTitle }: ProductData) => {
               })
               .parse(product.images);
 
+              const relatedImages = z.object({
+                first:z.string(),
+                second:z.string(),
+                third:z.string()
+              }).parse(product.relatedImages)
+
             return (
-              <ProductCard key={product.id} {...product} images={images} />
+              <ProductCard key={product.id} {...product} images={images} relatedImages={relatedImages} />
             );
           })}
         </div>

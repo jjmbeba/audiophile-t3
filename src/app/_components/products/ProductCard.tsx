@@ -11,6 +11,11 @@ export interface Product extends Props {
     desktop: string;
     mobile: string;
   };
+  relatedImages:{
+    first:string;
+    second:string;
+    third:string;
+  }
 }
 
 const ProductCard = ({
@@ -20,6 +25,7 @@ const ProductCard = ({
   description,
   slug,
   category,
+  relatedImages
 }: Product) => {
   return (
     <div className="flex flex-col items-center *:text-center md:*:text-left lg:flex-row lg:gap-[8rem] lg:even:flex-row-reverse">
