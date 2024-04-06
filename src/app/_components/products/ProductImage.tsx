@@ -41,7 +41,7 @@ const ProductImage = ({ images, name }: Props) => {
         : "mobile";
 
   return (
-    <div className="relative h-[22rem] w-[20.4375rem] md:h-[46.35474rem] md:w-[43.0625rem] lg:h-[34.75rem] lg:w-[40.75rem]">
+    <div className="relative h-[22rem] w-[20.4375rem] md:h-[40.35474rem] md:w-[60.0625vw] lg:h-[34.75rem] lg:w-[40.75rem]">
       <Image
         src={images[screen]}
         fill
