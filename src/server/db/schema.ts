@@ -56,13 +56,30 @@ export const accessories = createTable("accessory", {
   }),
 });
 
+export const recommendations = createTable("recommendation", {
+  id: serial("id").primaryKey(),
+  productID: integer("productID").references(() => products.id, {
+    onDelete: "cascade",
+    onUpdate: "cascade",
+  }),
+  secondaryProductID:serial("secondaryProductID").notNull()
+});
+
 export const productRelations = relations(products, ({ many }) => ({
   accessories: many(accessories),
+  seeMoreLinks:many(recommendations)
 }));
 
 export const accessoriesRelations = relations(accessories, ({ one }) => ({
   product: one(products, {
     fields: [accessories.productID],
+    references: [products.id],
+  }),
+}));
+
+export const recommendationsRelations = relations(recommendations, ({ one }) => ({
+  product: one(products, {
+    fields: [recommendations.productID],
     references: [products.id],
   }),
 }));

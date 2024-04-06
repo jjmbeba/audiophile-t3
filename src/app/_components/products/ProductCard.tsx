@@ -11,11 +11,6 @@ export interface Product extends Props {
     desktop: string;
     mobile: string;
   };
-  relatedImages:{
-    first:string;
-    second:string;
-    third:string;
-  }
 }
 
 const ProductCard = ({

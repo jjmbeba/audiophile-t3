@@ -30,7 +30,37 @@ export const productRouter = createTRPCRouter({
         where: eq(products.slug, slug),
         with: {
           accessories: true,
+          seeMoreLinks: true,
         },
       });
+    }),
+
+  getProductRecommendations: publicProcedure
+    .input(
+      z
+        .object({
+          id: z.number(),
+          productID: z.number(),
+          secondaryProductID: z.number(),
+        })
+        .array()
+    )
+    .query(({
+      input, ctx
+    }) => {
+      return Promise.all(
+        input.map(async (rec) => {
+          return ctx.db.query.products.findFirst({
+            where: eq(products.id, rec.secondaryProductID),
+            columns: {
+              id: true,
+              images: true,
+              name: true,
+              slug: true,
+              category:true
+            },
+          });
+        }),
+      );
     }),
 });

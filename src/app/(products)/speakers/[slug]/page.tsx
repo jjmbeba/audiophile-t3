@@ -23,8 +23,6 @@ const Page = async ({ params }: Props) => {
   const product = await api.product.getProduct(params.slug);
   if (!product) return null; // or a fallback component
 
-  console.log(product);
-
   const images = z
     .object({
       tablet: z.string(),
@@ -50,7 +48,13 @@ const Page = async ({ params }: Props) => {
     }).array()
     .parse(product.accessories);
 
-  return <ProductDetail bannerTitle="SPEAKERS" {...product} accessories={accessories} images={images} relatedImages={relatedImages}/>;
+    const recommendations = z.object({
+      id:z.number(),
+      productID:z.number(),
+      secondaryProductID:z.number()
+    }).array().parse(product.seeMoreLinks)
+
+  return <ProductDetail bannerTitle="SPEAKERS" {...product} accessories={accessories} images={images} relatedImages={relatedImages} recommendations={recommendations}/>;
 };
 
 export default Page;
