@@ -1,4 +1,4 @@
-import { SignInButton, SignUpButton, currentUser } from "@clerk/nextjs";
+import { ClerkLoading, SignInButton, SignUpButton, UserButton, currentUser } from "@clerk/nextjs";
 import Logo from "../Logo";
 import NavLinks from "../NavLinks";
 import Cart from "./Cart";
@@ -7,6 +7,7 @@ import User from "./User";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import { MoveRight } from "lucide-react";
+import { Skeleton } from "~/components/ui/skeleton";
 
 const Navbar = async () => {
   const user = await currentUser();
@@ -17,28 +18,29 @@ const Navbar = async () => {
       <Logo className="md:hidden" />
       <NavLinks className="hidden lg:flex" />
       {user?.id ? (
-        <Cart />
+        <div className="flex items-center gap-4">
+          <Cart />
+          <div className="w-8 h-8">
+            <ClerkLoading>
+              <Skeleton className="h-8 w-8 rounded-full bg-gray-700" />
+            </ClerkLoading>
+            <UserButton />
+          </div>
+        </div>
       ) : (
         <>
-          {/* <Link href={"/signup"} className="md:hidden">
-            <User />
-          </Link> */}
-          <div  className="lg:hidden">
+          <div className="lg:hidden">
             <SignUpButton mode="modal">
               <User />
             </SignUpButton>
           </div>
-          <div className="lg:flex items-center gap-2 hidden">
+          <div className="hidden items-center gap-2 lg:flex">
             <SignUpButton mode="modal">
               <Button className="rounded-[0.3rem] bg-white px-2 py-1 capitalize text-black">
                 <MoveRight className="mr-2 h-4 w-4" />
                 Get started
               </Button>
             </SignUpButton>
-            {/* <SignInButton mode="modal">
-              <Button className="rounded-[0.3rem] px-4 py-3 capitalize text-white bg-transparent" variant={'outline'}>
-                Login</Button>
-            </SignInButton> */}
           </div>
         </>
       )}
