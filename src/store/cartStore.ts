@@ -12,7 +12,8 @@ export interface ProductWithQuantity {
 interface CartState {
   cart: ProductWithQuantity[];
   updateProducts: (updatedProducts: ProductWithQuantity[]) => void;
-  addProduct:(newProduct:ProductWithQuantity) => void;
+  addProduct: (newProduct: ProductWithQuantity) => void;
+  clearCart: () => void;
 }
 
 export const useCartStore = create<CartState>()((set) => ({
@@ -21,7 +22,12 @@ export const useCartStore = create<CartState>()((set) => ({
     set((state) => ({
       cart: [...updatedProducts],
     })),
-    addProduct: (newProduct) => set((state) => ({
-      cart:[...state.cart, newProduct]
-    }))
+  addProduct: (newProduct) =>
+    set((state) => ({
+      cart: [...state.cart, newProduct],
+    })),
+  clearCart: () =>
+    set((state) => ({
+      cart: [],
+    })),
 }));

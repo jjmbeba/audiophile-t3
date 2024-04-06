@@ -21,8 +21,6 @@ const ItemCounter = ({ id, image, name, price }: Props) => {
     state.addProduct,
   ]);
 
-  console.log(cart);
-
   return (
     <div className="mt-[2.3125rem] flex items-center gap-[1rem]">
       <div className="flex max-w-[7.5rem] items-center justify-center overflow-x-hidden bg-[#f1f1f1] *:bg-transparent">
