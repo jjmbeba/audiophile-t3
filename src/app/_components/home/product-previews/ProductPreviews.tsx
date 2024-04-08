@@ -84,6 +84,7 @@ const ZX7SpeakerPreview = ({ screen }: { screen: string }) => {
       <Button
         variant={"outline"}
         className="mt-[2.5rem] border-black bg-transparent hover:bg-[#4c4c4c]"
+        asChild
       >
         <Link href={"/speakers/zx7-speaker"}>SEE PRODUCT</Link>
       </Button>
@@ -107,6 +108,7 @@ const YX1EarphonesPreview = ({ screen }: { screen: string }) => {
         <Button
           variant={"outline"}
           className="mt-[2.5rem] border-black bg-transparent hover:bg-[#4c4c4c]"
+          asChild
         >
           <Link href={"/earphones/yx1-earphones"}>SEE PRODUCT</Link>
         </Button>

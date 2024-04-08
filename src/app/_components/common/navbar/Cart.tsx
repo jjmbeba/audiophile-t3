@@ -23,6 +23,13 @@ const Cart = () => {
     state.clearCart,
   ]);
 
+  const numberOfItems = cart.reduce((acc, item) => item.quantity + acc, 0);
+
+  const totalPrice = cart.reduce(
+    (acc, item) => item.quantity * item.price + acc,
+    0,
+  );
+
   return (
     <Dialog>
       <DialogTrigger>
@@ -31,7 +38,7 @@ const Cart = () => {
       <DialogContent className="max-w-[20.4375rem] rounded-[0.5rem]">
         <DialogHeader>
           <DialogTitle className="flex items-center justify-between">
-            <h6>CART({cart.length})</h6>
+            <h6>CART({numberOfItems})</h6>
             <Button
               onClick={() => {
                 clearCart();
@@ -47,10 +54,15 @@ const Cart = () => {
             {cart.map((cartItem) => (
               <CartItem key={cartItem.id} {...cartItem} />
             ))}
-            {cart.length === 0 && (
+            {cart.length === 0 ? (
               <div className="mt-6 flex items-center justify-center gap-3">
                 <Ghost className="h-8 w-8" />
                 It&apos;s pretty lonely here.
+              </div>
+            ) : (
+              <div className="mt-[2.4375rem] flex items-center justify-between text-[#808080]">
+                TOTAL{" "}
+                <h6 className="text-black">$ {totalPrice.toLocaleString()}</h6>
               </div>
             )}
           </DialogDescription>
@@ -72,9 +84,9 @@ const CartItem = ({
 }: ProductWithQuantity) => {
   return (
     <div className="flex items-center justify-between">
-      <Skeleton className="h-16 w-16 rounded-[0.5rem] bg-gray-500" />
-      <div className="flex flex-col items-start">
-        <p className="font-bold text-black">{name}</p>
+      <Skeleton className="h-16 w-16 rounded-[0.5rem] bg-gray-500 object-contain" />
+      <div className="ml-4 flex flex-col items-start">
+        <p className="text-left font-bold text-black">{name}</p>
         <p className="text-[0.875rem]">${price.toLocaleString()}</p>
       </div>
       <div className="flex max-w-[7.5rem] items-center justify-center overflow-x-hidden bg-[#f1f1f1] *:bg-transparent">
