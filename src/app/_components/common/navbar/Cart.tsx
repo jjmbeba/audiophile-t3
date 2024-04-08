@@ -44,11 +44,15 @@ const Cart = () => {
             </Button>
           </DialogTitle>
           <DialogDescription className="mt-9 flex flex-col gap-6">
-            {cart.map((cartItem) => <CartItem key={cartItem.id} {...cartItem}/>)}
-            {cart.length === 0 && <div className="mt-6 flex items-center justify-center gap-3">
-              <Ghost className="h-8 w-8"/>
-              It&apos;s pretty lonely here.
-              </div>}
+            {cart.map((cartItem) => (
+              <CartItem key={cartItem.id} {...cartItem} />
+            ))}
+            {cart.length === 0 && (
+              <div className="mt-6 flex items-center justify-center gap-3">
+                <Ghost className="h-8 w-8" />
+                It&apos;s pretty lonely here.
+              </div>
+            )}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -59,7 +63,13 @@ const Cart = () => {
   );
 };
 
-const CartItem = ({id, image, name, price, quantity}: ProductWithQuantity) => {
+const CartItem = ({
+  id,
+  image,
+  name,
+  price,
+  quantity,
+}: ProductWithQuantity) => {
   return (
     <div className="flex items-center justify-between">
       <Skeleton className="h-16 w-16 rounded-[0.5rem] bg-gray-500" />
@@ -68,11 +78,21 @@ const CartItem = ({id, image, name, price, quantity}: ProductWithQuantity) => {
         <p className="text-[0.875rem]">${price.toLocaleString()}</p>
       </div>
       <div className="flex max-w-[7.5rem] items-center justify-center overflow-x-hidden bg-[#f1f1f1] *:bg-transparent">
-        <Button className="px-5 py-4 text-[#b5b5b5]" onClick={() => {}}>
+        <Button
+          className="px-5 py-4 text-[#b5b5b5]"
+          onClick={() => {
+            console.log("clicked");
+          }}
+        >
           -
         </Button>
         <p>{quantity}</p>
-        <Button className="px-5 py-4 text-[#b5b5b5]" onClick={() => {}}>
+        <Button
+          className="px-5 py-4 text-[#b5b5b5]"
+          onClick={() => {
+            console.log("clicked");
+          }}
+        >
           +
         </Button>
       </div>
