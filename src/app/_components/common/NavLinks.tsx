@@ -48,7 +48,6 @@ type NavLink = {
 
 const NavLink = ({ text, link, exact }: NavLink) => {
   const pathname = usePathname();
-  // console.log(pathname, link, pathname.startsWith(link));
   const isActive = exact ? pathname === link : pathname.startsWith(link);
 
   return (

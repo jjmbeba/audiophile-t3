@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { Product } from "~/app/_components/products/ProductCard";
 
 export interface ProductWithQuantity {
   quantity: number;
@@ -7,6 +6,7 @@ export interface ProductWithQuantity {
   price: number;
   image: string;
   id: number;
+  shortName:string;
 }
 
 interface CartState {

@@ -36,6 +36,7 @@ export const products = createTable(
     images: json("images").notNull(),
     relatedImages:json("relatedImages"),
     categoryImages: json("categoryImages").notNull(),
+    shortName:text('shortName').notNull().default(""),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),

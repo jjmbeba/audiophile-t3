@@ -81,32 +81,74 @@ const CartItem = ({
   name,
   price,
   quantity,
+  shortName,
 }: ProductWithQuantity) => {
+  const increaseCartItemQuantity = ({ id }: { id: number }) => {
+    const cart = useCartStore.getState().cart;
+
+    const newCartItems = cart.map((cartItem) => {
+      if (cartItem.id === id) {
+        return {
+          ...cartItem,
+          quantity: cartItem.quantity + 1,
+        };
+      } else {
+        return cartItem;
+      }
+    });
+
+    useCartStore.setState({
+      cart: newCartItems,
+    });
+  };
+
+  const decreaseCartItemQuantity = ({ id }: { id: number }) => {
+    const cart = useCartStore.getState().cart;
+
+    const newCartItems = cart.map((cartItem) => {
+      if (cartItem.id === id && cartItem.quantity > 1) {
+        return {
+          ...cartItem,
+          quantity: cartItem.quantity - 1,
+        };
+      } else {
+        return cartItem;
+      }
+    });
+
+    useCartStore.setState({
+      cart: newCartItems,
+    });
+  };
+
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center">
       <Skeleton className="h-16 w-16 rounded-[0.5rem] bg-gray-500 object-contain" />
-      <div className="ml-4 flex flex-col items-start">
-        <p className="text-left font-bold text-black">{name}</p>
-        <p className="text-[0.875rem]">${price.toLocaleString()}</p>
-      </div>
-      <div className="flex max-w-[7.5rem] items-center justify-center overflow-x-hidden bg-[#f1f1f1] *:bg-transparent">
-        <Button
-          className="px-5 py-4 text-[#b5b5b5]"
-          onClick={() => {
-            console.log("clicked");
-          }}
-        >
-          -
-        </Button>
-        <p>{quantity}</p>
-        <Button
-          className="px-5 py-4 text-[#b5b5b5]"
-          onClick={() => {
-            console.log("clicked");
-          }}
-        >
-          +
-        </Button>
+      <div className="flex flex-1 items-center justify-between">
+        <div className="ml-4 flex flex-col items-start">
+          <p className="text-left font-bold text-black">{shortName}</p>
+          <p className="text-[0.875rem]">${price.toLocaleString()}</p>
+        </div>
+        <div className="flex max-w-[6rem] items-center justify-center overflow-x-hidden bg-[#f1f1f1] *:bg-transparent">
+          <Button
+            className="px-4 py-3 text-[#b5b5b5]"
+            onClick={() => {
+              decreaseCartItemQuantity({ id });
+            }}
+            disabled={quantity < 2}
+          >
+            -
+          </Button>
+          <p>{quantity}</p>
+          <Button
+            className="px-4 py-3 text-[#b5b5b5]"
+            onClick={() => {
+              increaseCartItemQuantity({ id });
+            }}
+          >
+            +
+          </Button>
+        </div>
       </div>
     </div>
   );

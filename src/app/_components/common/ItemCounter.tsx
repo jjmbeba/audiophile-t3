@@ -10,9 +10,10 @@ type Props = {
   price: number;
   image: string;
   id: number;
+  shortName:string;
 };
 
-const ItemCounter = ({ id, image, name, price }: Props) => {
+const ItemCounter = ({ id, image, name, price, shortName }: Props) => {
   const [count, setCount] = useState(1);
 
   const [cart, updateProducts, addProduct] = useCartStore((state) => [
@@ -68,6 +69,7 @@ const ItemCounter = ({ id, image, name, price }: Props) => {
               image,
               quantity: count,
               price,
+              shortName
             });
 
             toast.success(`${count} ${name} added to cart`);

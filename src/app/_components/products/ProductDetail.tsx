@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
-import { RouterOutputs } from "~/trpc/react";
 import { api } from "~/trpc/server";
 import Banner from "../common/Banner";
 import GoBackButton from "../common/GoBackButton";
@@ -62,6 +61,7 @@ const ProductDetailCard = ({
   features,
   accessories,
   relatedImages,
+  shortName,
   seeMoreLinks,
 }: Product & {
   accessories: ProductAccessory[];
@@ -91,6 +91,7 @@ const ProductDetailCard = ({
             name={name!}
             price={price}
             image={images.mobile}
+            shortName={shortName}
           />
         </div>
       </div>
@@ -205,10 +206,7 @@ md:gap-[0.6875rem]"
 };
 
 const RecommendationCard = ({ name, slug, category }: RecommendationOutput) => {
-  // console.log("slug",slug)
-  // console.log("category",category)
 
-  console.log(`${category}/${slug}`);
   return (
     <div className="flex flex-col items-center *:text-center">
       <div className="relative h-[7.5rem] w-[20.4375rem] rounded-[0.5rem] bg-gray-600 md:h-[19.875rem] md:w-[13.9375rem] lg:h-[19.875rem] lg:w-[21.875rem]" />
