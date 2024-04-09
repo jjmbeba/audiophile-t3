@@ -9,7 +9,7 @@ const GoBackButton = () => {
 
   return (
     <Button
-      className="mb-[1.9375rem] text-[#7d7d7d]"
+      className="mb-[1.9375rem] text-[#7d7d7d] capitalize"
       variant={"link"}
       onClick={() => router.back()}
     >
