@@ -16,6 +16,7 @@ import { Button } from "~/components/ui/button";
 import { ProductWithQuantity, useCartStore } from "~/store/cartStore";
 import { toast } from "sonner";
 import { Skeleton } from "~/components/ui/skeleton";
+import { useCartActions } from "~/store/actions";
 
 const Cart = () => {
   const [cart, clearCart] = useCartStore((state) => [
@@ -83,43 +84,8 @@ const CartItem = ({
   quantity,
   shortName,
 }: ProductWithQuantity) => {
-  const increaseCartItemQuantity = ({ id }: { id: number }) => {
-    const cart = useCartStore.getState().cart;
-
-    const newCartItems = cart.map((cartItem) => {
-      if (cartItem.id === id) {
-        return {
-          ...cartItem,
-          quantity: cartItem.quantity + 1,
-        };
-      } else {
-        return cartItem;
-      }
-    });
-
-    useCartStore.setState({
-      cart: newCartItems,
-    });
-  };
-
-  const decreaseCartItemQuantity = ({ id }: { id: number }) => {
-    const cart = useCartStore.getState().cart;
-
-    const newCartItems = cart.map((cartItem) => {
-      if (cartItem.id === id && cartItem.quantity > 1) {
-        return {
-          ...cartItem,
-          quantity: cartItem.quantity - 1,
-        };
-      } else {
-        return cartItem;
-      }
-    });
-
-    useCartStore.setState({
-      cart: newCartItems,
-    });
-  };
+  const { increaseCartItemQuantity, decreaseCartItemQuantity } =
+    useCartActions();
 
   return (
     <div className="flex items-center">
