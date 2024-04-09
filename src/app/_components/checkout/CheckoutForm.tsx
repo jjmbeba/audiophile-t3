@@ -72,7 +72,7 @@ const CheckoutForm = () => {
     queryKey: ["countries"],
     queryFn: async ():Promise<Country[]> => {
       return axios
-        .get("https://restcountries.com/v3.1/all")
+        .get<Country[]>("https://restcountries.com/v3.1/all")
         .then((res) => {
             return res.data
         });
