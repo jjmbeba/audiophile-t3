@@ -70,10 +70,12 @@ const CheckoutForm = () => {
 
   const { data: countries, isLoading: fetchCountriesLoading } = useQuery({
     queryKey: ["countries"],
-    queryFn: async () => {
+    queryFn: async ():Promise<Country[]> => {
       return axios
         .get("https://restcountries.com/v3.1/all")
-        .then((res) => res.data);
+        .then((res) => {
+            return res.data
+        });
     },
   });
 
