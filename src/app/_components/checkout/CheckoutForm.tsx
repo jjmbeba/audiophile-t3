@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import validator from "validator";
 import { z } from "zod";
 import axios from "axios";
@@ -69,7 +69,14 @@ const CheckoutForm = () => {
     console.log(values);
   }
 
-  const { data: countries, isLoading: fetchCountriesLoading } = useQuery({
+  const country = useWatch({
+    control:form.control,
+    name:"country"
+  })
+
+  console.log(country)
+
+  const { data: countries, isLoading: isFetchCountriesLoading } = useQuery({
     queryKey: ["countries"],
     queryFn: async (): Promise<Country[]> => {
       return axios
@@ -172,16 +179,47 @@ const CheckoutForm = () => {
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger>
+                      <SelectTrigger isFetching={isFetchCountriesLoading}>
                         <SelectValue placeholder="Select your country" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {countries?.map(({ name }: Country) => (
+                      {countries?.sort((a,b) => {
+                        if(a.name.official.toLowerCase() < b.name.official.toLowerCase()){
+                          return -1
+                        }else if(a.name.official.toLowerCase() > b.name.official.toLowerCase()){
+                          return 1
+                        }
+
+                        return 0;
+                      }).map(({ name }: Country) => (
                         <SelectItem key={name.official} value={name.official}>
                           {name.official}
                         </SelectItem>
                       ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="city"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>City</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your city" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value={"official"}>Nairobi</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
