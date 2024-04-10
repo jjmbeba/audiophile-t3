@@ -25,6 +25,7 @@ import {
 } from "~/components/ui/select";
 
 import { Input } from "~/components/ui/input";
+import CartSummary from "./CartSummary";
 
 type Country = {
   name: {
@@ -70,11 +71,11 @@ const CheckoutForm = () => {
 
   const { data: countries, isLoading: fetchCountriesLoading } = useQuery({
     queryKey: ["countries"],
-    queryFn: async ():Promise<Country[]> => {
+    queryFn: async (): Promise<Country[]> => {
       return axios
         .get<Country[]>("https://restcountries.com/v3.1/all")
         .then((res) => {
-            return res.data
+          return res.data;
         });
     },
   });
@@ -84,111 +85,118 @@ const CheckoutForm = () => {
   }
 
   return (
-    <div className=" *:mx-[1.625rem] *:rounded-[0.5rem] *:bg-white *:px-3 *:py-6 lg:*:mx-[10.3125rem]">
-      <div className="mt-[1.9375rem]">
+    <div className="">
+      <div className="mx-[1.625rem] mt-[1.9375rem] px-3 py-6 lg:mx-[10.3125rem]">
         <h4>CHECKOUT</h4>
         <p className="mt-10 font-bold text-primary">BILLING DETAILS</p>
       </div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="John Doe" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="johndoe@email.com" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="address"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Address</FormLabel>
-                <FormControl>
-                  <Input placeholder="Moi avenue, Nairobi" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="phone"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Phone number</FormLabel>
-                <FormControl>
-                  <Input placeholder="0712345678" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="zipCode"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Zip Code</FormLabel>
-                <FormControl>
-                  <Input placeholder="00100" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="country"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Country</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="mb-[8.0625rem] space-y-8"
+        >
+          <div className="mx-[1.625rem] rounded-[0.5rem] bg-white px-3 py-6 lg:mx-[10.3125rem]">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select your country" />
-                    </SelectTrigger>
+                    <Input placeholder="John Doe" {...field} />
                   </FormControl>
-                  <SelectContent>
-                    {countries?.map(({ name }: Country) => (
-                      <SelectItem key={name.official} value={name.official}>
-                        {name.official}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button className="w-full" type="submit">
-            CONTINUE & PAY
-          </Button>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="johndoe@email.com" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Address</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Moi avenue, Nairobi" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone number</FormLabel>
+                  <FormControl>
+                    <Input placeholder="0712345678" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="zipCode"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Zip Code</FormLabel>
+                  <FormControl>
+                    <Input placeholder="00100" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="country"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Country</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your country" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {countries?.map(({ name }: Country) => (
+                        <SelectItem key={name.official} value={name.official}>
+                          {name.official}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <CartSummary />
+          <div className="mx-[1.625rem] lg:mx-[10.3125rem] ">
+            <Button className="w-full" type="submit">
+              CONTINUE & PAY
+            </Button>
+          </div>
         </form>
       </Form>
-      {/* <CartSummary /> */}
     </div>
   );
 };

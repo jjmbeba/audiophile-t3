@@ -24,12 +24,7 @@ const Cart = () => {
     state.clearCart,
   ]);
 
-  const numberOfItems = cart.reduce((acc, item) => item.quantity + acc, 0);
-
-  const totalPrice = cart.reduce(
-    (acc, item) => item.quantity * item.price + acc,
-    0,
-  );
+  const { numberOfItems, totalPrice } = useCartActions();
 
   return (
     <Dialog>
@@ -76,14 +71,7 @@ const Cart = () => {
   );
 };
 
-const CartItem = ({
-  id,
-  image,
-  name,
-  price,
-  quantity,
-  shortName,
-}: ProductWithQuantity) => {
+const CartItem = ({ id, price, quantity, shortName }: ProductWithQuantity) => {
   const { increaseCartItemQuantity, decreaseCartItemQuantity } =
     useCartActions();
 
@@ -93,7 +81,9 @@ const CartItem = ({
       <div className="flex flex-1 items-center justify-between">
         <div className="ml-4 flex flex-col items-start">
           <p className="text-left font-bold text-black">{shortName}</p>
-          <p className="text-[0.875rem]">${price.toLocaleString()}</p>
+          <p className="text-[0.875rem] text-[#808080]">
+            ${price.toLocaleString()}
+          </p>
         </div>
         <div className="flex max-w-[6rem] items-center justify-center overflow-x-hidden bg-[#f1f1f1] *:bg-transparent">
           <Button
