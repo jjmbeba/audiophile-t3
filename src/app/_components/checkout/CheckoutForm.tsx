@@ -74,11 +74,6 @@ const CheckoutForm = () => {
   const { isLoading: isFetchCountriesLoading, data: countries } =
     api.country.getAvailableCountries.useQuery();
 
-  const country = useWatch({
-    control: form.control,
-    name: "country",
-  });
-
   return (
     <div className="">
       <div className="mx-[1.625rem] mt-[1.9375rem] px-3 py-6 lg:mx-[10.3125rem]">
@@ -209,7 +204,7 @@ const CheckoutForm = () => {
                     </FormControl>
                     <SelectContent>
                       {selectedCountry?.cities.map(({ id, name }) => (
-                        <SelectItem value={id.toString()}>{name}</SelectItem>
+                        <SelectItem key={id} value={id.toString()}>{name}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
