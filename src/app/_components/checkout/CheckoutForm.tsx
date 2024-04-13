@@ -1,11 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery } from "@tanstack/react-query";
 import { useForm, useWatch } from "react-hook-form";
 import validator from "validator";
 import { z } from "zod";
-import axios from "axios";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -24,15 +22,10 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 
+import { useState } from "react";
 import { Input } from "~/components/ui/input";
+import { RouterOutputs, api } from "~/trpc/react";
 import CartSummary from "./CartSummary";
-
-type Country = {
-  name: {
-    official: string;
-    common: string;
-  };
-};
 
 const checkoutSchema = z.object({
   name: z.string().min(2, {
@@ -46,8 +39,12 @@ const checkoutSchema = z.object({
   zipCode: z.string().min(2, {
     message: "Zip code is required",
   }),
-  country: z.string(),
-  city: z.string(),
+  country: z.string().min(1, {
+    message: "Country is required",
+  }),
+  city: z.string().min(1, {
+    message: "City is required",
+  }),
   paymentMethod: z.string(),
 });
 const CheckoutForm = () => {
@@ -69,27 +66,18 @@ const CheckoutForm = () => {
     console.log(values);
   }
 
+  type Country = RouterOutputs["country"]["getAvailableCountries"][number];
+
+  const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(
+    undefined,
+  );
+  const { isLoading: isFetchCountriesLoading, data: countries } =
+    api.country.getAvailableCountries.useQuery();
+
   const country = useWatch({
-    control:form.control,
-    name:"country"
-  })
-
-  console.log(country)
-
-  const { data: countries, isLoading: isFetchCountriesLoading } = useQuery({
-    queryKey: ["countries"],
-    queryFn: async (): Promise<Country[]> => {
-      return axios
-        .get<Country[]>("https://restcountries.com/v3.1/all")
-        .then((res) => {
-          return res.data;
-        });
-    },
+    control: form.control,
+    name: "country",
   });
-
-  if (countries) {
-    console.log(countries[0]);
-  }
 
   return (
     <div className="">
@@ -175,7 +163,13 @@ const CheckoutForm = () => {
                 <FormItem>
                   <FormLabel>Country</FormLabel>
                   <Select
-                    onValueChange={field.onChange}
+                    onValueChange={(countryID) => {
+                      const country = countries?.find(
+                        (country) => country.id.toString() === countryID,
+                      );
+                      setSelectedCountry(country);
+                      field.onChange(countryID);
+                    }}
                     defaultValue={field.value}
                   >
                     <FormControl>
@@ -184,17 +178,12 @@ const CheckoutForm = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {countries?.sort((a,b) => {
-                        if(a.name.official.toLowerCase() < b.name.official.toLowerCase()){
-                          return -1
-                        }else if(a.name.official.toLowerCase() > b.name.official.toLowerCase()){
-                          return 1
-                        }
-
-                        return 0;
-                      }).map(({ name }: Country) => (
-                        <SelectItem key={name.official} value={name.official}>
-                          {name.official}
+                      {countries?.map((country) => (
+                        <SelectItem
+                          key={country.id}
+                          value={country.id.toString()}
+                        >
+                          {country.name}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -214,12 +203,14 @@ const CheckoutForm = () => {
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger>
+                      <SelectTrigger disabled={!selectedCountry}>
                         <SelectValue placeholder="Select your city" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value={"official"}>Nairobi</SelectItem>
+                      {selectedCountry?.cities.map(({ id, name }) => (
+                        <SelectItem value={id.toString()}>{name}</SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />

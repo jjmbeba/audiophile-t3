@@ -32,11 +32,11 @@ export const products = createTable(
     price: integer("price").notNull(),
     category: text("category").notNull(),
     features: text("features").notNull(),
-    slug:text('slug').notNull().default(""),
+    slug: text("slug").notNull().default(""),
     images: json("images").notNull(),
-    relatedImages:json("relatedImages"),
+    relatedImages: json("relatedImages"),
     categoryImages: json("categoryImages").notNull(),
-    shortName:text('shortName').notNull().default(""),
+    shortName: text("shortName").notNull().default(""),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
@@ -57,18 +57,49 @@ export const accessories = createTable("accessory", {
   }),
 });
 
+export const supportedCountries = createTable("supportedCountries", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull().unique(),
+});
+
+export const supportedCities = createTable("supportedCities", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull().unique(),
+  countryID: integer("countryID").references(() => supportedCountries.id, {
+    onDelete: "cascade",
+    onUpdate: "cascade",
+  }),
+});
+
+export const supportedCountriesRelations = relations(
+  supportedCountries,
+  ({ many }) => ({
+    cities: many(supportedCities),
+  }),
+);
+
+export const supportedCitiesRelations = relations(
+  supportedCities,
+  ({ one }) => ({
+    country: one(supportedCountries, {
+      fields: [supportedCities.countryID],
+      references: [supportedCountries.id],
+    }),
+  }),
+);
+
 export const recommendations = createTable("recommendation", {
   id: serial("id").primaryKey(),
   productID: integer("productID").references(() => products.id, {
     onDelete: "cascade",
     onUpdate: "cascade",
   }),
-  secondaryProductID:serial("secondaryProductID").notNull()
+  secondaryProductID: serial("secondaryProductID").notNull(),
 });
 
 export const productRelations = relations(products, ({ many }) => ({
   accessories: many(accessories),
-  seeMoreLinks:many(recommendations)
+  seeMoreLinks: many(recommendations),
 }));
 
 export const accessoriesRelations = relations(accessories, ({ one }) => ({
@@ -78,9 +109,12 @@ export const accessoriesRelations = relations(accessories, ({ one }) => ({
   }),
 }));
 
-export const recommendationsRelations = relations(recommendations, ({ one }) => ({
-  product: one(products, {
-    fields: [recommendations.productID],
-    references: [products.id],
+export const recommendationsRelations = relations(
+  recommendations,
+  ({ one }) => ({
+    product: one(products, {
+      fields: [recommendations.productID],
+      references: [products.id],
+    }),
   }),
-}));
+);

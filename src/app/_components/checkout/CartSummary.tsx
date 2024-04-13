@@ -50,9 +50,9 @@ const CheckoutPriceStat = ({
   isGrandTotal?: boolean;
 }) => {
   return (
-    <p className={` flex items-center justify-between text-[#808080] ${isGrandTotal ? 'mt-[2.25rem]' : ''}`}>
+    <div className={` flex items-center justify-between text-[#808080] ${isGrandTotal ? 'mt-[2.25rem]' : ''}`}>
       {name} <h6 className={isGrandTotal ? 'text-primary' : 'text-black'}>$ {price.toLocaleString()}</h6>
-    </p>
+    </div>
   );
 };
 
