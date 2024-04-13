@@ -24,7 +24,7 @@ import {
 
 import { useState } from "react";
 import { Input } from "~/components/ui/input";
-import { RouterOutputs, api } from "~/trpc/react";
+import { type RouterOutputs, api } from "~/trpc/react";
 import CartSummary from "./CartSummary";
 
 const checkoutSchema = z.object({
