@@ -27,11 +27,6 @@ import { Input } from "~/components/ui/input";
 import { api, type RouterOutputs } from "~/trpc/react";
 import CartSummary from "./CartSummary";
 
-import { loadStripe } from "@stripe/stripe-js";
-import { env } from "~/env";
-import { EmbeddedCheckout } from "@stripe/react-stripe-js";
-
-
 const checkoutSchema = z.object({
   name: z.string().min(2, {
     message: "Name should be at least 2 characters",
