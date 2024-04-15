@@ -55,7 +55,7 @@ const Cart = () => {
               const productData = cartItem.product_data as
                 | { shortName: string }
                 | undefined;
-              const shortName = productData?.shortName || ""; // Providing a default value if product_data is undefined
+              const shortName = productData?.shortName ?? ""; // Providing a default value if product_data is undefined
 
               return (
                 <CartItem
