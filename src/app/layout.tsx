@@ -10,6 +10,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 import Footer from "./_components/common/footer/Footer";
 import Navbar from "./_components/common/navbar/Navbar";
 import { Toaster } from "~/components/ui/sonner";
+import CartProvider from "~/providers/CartProvider";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -40,13 +41,15 @@ export default function RootLayout({
       <html lang="en">
         <body className={`font-sans ${manrope.variable} h-screen`}>
           <TRPCReactProvider>
-            <Navbar />
-            <div className="bg-black">
-              <Separator className="bg-[#1b1b1b] md:mx-6 lg:mx-[10.3125rem]" />
-            </div>
-            {children}
-            <Toaster richColors />
-            <Footer />
+            <CartProvider>
+              <Navbar />
+              <div className="bg-black">
+                <Separator className="bg-[#1b1b1b] md:mx-6 lg:mx-[10.3125rem]" />
+              </div>
+              {children}
+              <Toaster richColors />
+              <Footer />
+            </CartProvider>
           </TRPCReactProvider>
         </body>
       </html>

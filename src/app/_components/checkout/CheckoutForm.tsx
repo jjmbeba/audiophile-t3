@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import validator from "validator";
 import { z } from "zod";
 
@@ -24,8 +24,13 @@ import {
 
 import { useState } from "react";
 import { Input } from "~/components/ui/input";
-import { type RouterOutputs, api } from "~/trpc/react";
+import { api, type RouterOutputs } from "~/trpc/react";
 import CartSummary from "./CartSummary";
+
+import { loadStripe } from "@stripe/stripe-js";
+import { env } from "~/env";
+import { EmbeddedCheckout } from "@stripe/react-stripe-js";
+
 
 const checkoutSchema = z.object({
   name: z.string().min(2, {
@@ -204,7 +209,9 @@ const CheckoutForm = () => {
                     </FormControl>
                     <SelectContent>
                       {selectedCountry?.cities.map(({ id, name }) => (
-                        <SelectItem key={id} value={id.toString()}>{name}</SelectItem>
+                        <SelectItem key={id} value={id.toString()}>
+                          {name}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>

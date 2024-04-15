@@ -2,26 +2,21 @@
 
 import { useState } from "react";
 import { toast } from "sonner";
+import { useShoppingCart } from "use-shopping-cart";
 import { Button } from "~/components/ui/button";
-import { useCartStore } from "~/store/cartStore";
 
 type Props = {
   name: string;
   price: number;
   image: string;
   id: number;
-  shortName:string;
+  shortName: string;
 };
 
 const ItemCounter = ({ id, image, name, price, shortName }: Props) => {
   const [count, setCount] = useState(1);
 
-  const [cart, updateProducts, addProduct] = useCartStore((state) => [
-    state.cart,
-    state.updateProducts,
-    state.addProduct,
-  ]);
-
+  const { addItem } = useShoppingCart();
   return (
     <div className="mt-[2.3125rem] flex items-center gap-[1rem]">
       <div className="flex max-w-[7.5rem] items-center justify-center overflow-x-hidden bg-[#f1f1f1] *:bg-transparent">
@@ -46,35 +41,54 @@ const ItemCounter = ({ id, image, name, price, shortName }: Props) => {
       </div>
       <Button
         onClick={() => {
-          const foundProduct = cart.find((product) => product.id === id);
-
-          if (foundProduct) {
-            const updatedProducts = cart.map((product) => {
-              if (product.id === id) {
-                return {
-                  ...product,
-                  quantity: product.quantity + count,
-                };
-              } else {
-                return product;
-              }
-            });
-
-            updateProducts(updatedProducts);
-            toast.success(`${name} quantity updated successfully`);
-          } else {
-            addProduct({
-              id,
+          addItem(
+            {
               name,
-              image,
-              quantity: count,
+              id: "price_OkRxVM2hCVPkKtrNNCVfzwG1",
               price,
-              shortName
-            });
+              image,
+              currency: "USD",
+            },
+            {
+              count,
+              product_metadata: {
+                shortName: shortName,
+              },
+            },
+          );
 
-            toast.success(`${count} ${name} added to cart`);
-          }
+          toast.success(`${name} added to cart`);
         }}
+        // onClick={() => {
+        //   const foundProduct = cart.find((product) => product.id === id);
+
+        //   if (foundProduct) {
+        //     const updatedProducts = cart.map((product) => {
+        //       if (product.id === id) {
+        //         return {
+        //           ...product,
+        //           quantity: product.quantity + count,
+        //         };
+        //       } else {
+        //         return product;
+        //       }
+        //     });
+
+        //     updateProducts(updatedProducts);
+        //     toast.success(`${name} quantity updated successfully`);
+        //   } else {
+        //     addProduct({
+        //       id,
+        //       name,
+        //       image,
+        //       quantity: count,
+        //       price,
+        //       shortName
+        //     });
+
+        //     toast.success(`${count} ${name} added to cart`);
+        //   }
+        // }}
       >
         ADD TO CART
       </Button>
