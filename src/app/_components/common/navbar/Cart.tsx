@@ -61,7 +61,7 @@ const Cart = () => {
                 <CartItem
                   key={cartItem.id}
                   {...cartItem}
-                  image={cartItem.image!}
+                  image={cartItem.image}
                   shortName={shortName}
                 />
               );
