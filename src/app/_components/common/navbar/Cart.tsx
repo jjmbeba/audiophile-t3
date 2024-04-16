@@ -27,17 +27,14 @@ const Cart = () => {
       mutationKey: ["redirectToCheckout"],
       mutationFn: async () => {
         try {
-          const result = await redirectToCheckout();
-          if (result?.error) {
-            console.error(result);
-          }
+          await redirectToCheckout();
         } catch (error) {
           console.error(error);
         }
       },
     });
 
-    console.log(cartDetails)
+  console.log(cartDetails);
 
   return (
     <Dialog>
