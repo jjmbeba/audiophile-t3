@@ -10,25 +10,34 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 
-import { Ghost, ShoppingCart, Trash } from "lucide-react";
+import { Ghost, Loader2, ShoppingCart, Trash } from "lucide-react";
 import { toast } from "sonner";
 import { useShoppingCart } from "use-shopping-cart";
 import { CartEntry } from "use-shopping-cart/core";
 import { Button } from "~/components/ui/button";
 import { Skeleton } from "~/components/ui/skeleton";
-
-interface ProductWithQuantity {
-  quantity: number;
-  name: string;
-  price: number;
-  image: string;
-  id: string;
-  shortName: string;
-}
+import { useMutation } from "@tanstack/react-query";
 
 const Cart = () => {
+  const { cartCount, cartDetails, clearCart, totalPrice, redirectToCheckout } =
+    useShoppingCart();
 
-  const { cartCount, cartDetails, clearCart, totalPrice } = useShoppingCart();
+  const { mutate: redirectCheckout, isPending: isRedirectToCheckoutPending } =
+    useMutation({
+      mutationKey: ["redirectToCheckout"],
+      mutationFn: async () => {
+        try {
+          const result = await redirectToCheckout();
+          if (result?.error) {
+            console.error(result);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      },
+    });
+
+    console.log(cartDetails)
 
   return (
     <Dialog>
@@ -80,7 +89,21 @@ const Cart = () => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          {cartCount! > 0 && <Button>Checkout</Button>}
+          {cartCount! > 0 && (
+            <Button
+              onClick={async (e) => {
+                e.preventDefault();
+
+                redirectCheckout();
+              }}
+              disabled={isRedirectToCheckoutPending}
+            >
+              {isRedirectToCheckoutPending && (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              Checkout
+            </Button>
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -125,7 +148,7 @@ const CartItem = ({ id, price, quantity, shortName, name }: CartEntry) => {
             className="rounded-[0.5rem] capitalize text-[#808080]"
             onClick={() => {
               removeItem(id);
-              toast.info(`${name} has been removed from cart`)
+              toast.info(`${name} has been removed from cart`);
             }}
             size={"icon"}
           >

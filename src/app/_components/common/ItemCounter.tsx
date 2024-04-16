@@ -44,7 +44,7 @@ const ItemCounter = ({ id, image, name, price, shortName }: Props) => {
           addItem(
             {
               name,
-              id: "price_OkRxVM2hCVPkKtrNNCVfzwG1",
+              id: "price_1P621JDEPSRRihmXXMcLMkrj",
               price,
               image,
               currency: "USD",
@@ -59,36 +59,6 @@ const ItemCounter = ({ id, image, name, price, shortName }: Props) => {
 
           toast.success(`${name} added to cart`);
         }}
-        // onClick={() => {
-        //   const foundProduct = cart.find((product) => product.id === id);
-
-        //   if (foundProduct) {
-        //     const updatedProducts = cart.map((product) => {
-        //       if (product.id === id) {
-        //         return {
-        //           ...product,
-        //           quantity: product.quantity + count,
-        //         };
-        //       } else {
-        //         return product;
-        //       }
-        //     });
-
-        //     updateProducts(updatedProducts);
-        //     toast.success(`${name} quantity updated successfully`);
-        //   } else {
-        //     addProduct({
-        //       id,
-        //       name,
-        //       image,
-        //       quantity: count,
-        //       price,
-        //       shortName
-        //     });
-
-        //     toast.success(`${count} ${name} added to cart`);
-        //   }
-        // }}
       >
         ADD TO CART
       </Button>

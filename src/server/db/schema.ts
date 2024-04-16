@@ -37,6 +37,7 @@ export const products = createTable(
     relatedImages: json("relatedImages"),
     categoryImages: json("categoryImages").notNull(),
     shortName: text("shortName").notNull().default(""),
+    stripe_prod_id:text('stripe_prod_id'),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
