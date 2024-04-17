@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Button } from "~/components/ui/button";
 import { api } from "~/trpc/server";
 import Banner from "../common/Banner";
@@ -63,7 +63,7 @@ const ProductDetailCard = ({
   relatedImages,
   shortName,
   seeMoreLinks,
-  stripe_price_id
+  stripe_price_id,
 }: Product & {
   accessories: ProductAccessory[];
   seeMoreLinks: ProductRecommendation[];
@@ -97,7 +97,7 @@ const ProductDetailCard = ({
           />
         </div>
       </div>
-      <div className="lg:flex justify-between">
+      <div className="justify-between lg:flex">
         <ProductFeatures features={features} />
         <ProductAccessories accessories={accessories} />
       </div>
@@ -208,7 +208,6 @@ md:gap-[0.6875rem]"
 };
 
 const RecommendationCard = ({ name, slug, category }: RecommendationOutput) => {
-
   return (
     <div className="flex flex-col items-center *:text-center">
       <div className="relative h-[7.5rem] w-[20.4375rem] rounded-[0.5rem] bg-gray-600 md:h-[19.875rem] md:w-[13.9375rem] lg:h-[19.875rem] lg:w-[21.875rem]" />

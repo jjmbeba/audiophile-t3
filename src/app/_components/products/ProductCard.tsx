@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Button } from "~/components/ui/button";
 import { RouterOutputs } from "~/trpc/react";
 import ProductImage from "./ProductImage";
@@ -11,11 +11,11 @@ export interface Product extends Props {
     desktop: string;
     mobile: string;
   };
-  relatedImages:{
-    first:string;
-    second:string;
-    third:string;
-  }
+  relatedImages: {
+    first: string;
+    second: string;
+    third: string;
+  };
 }
 
 const ProductCard = ({
@@ -24,7 +24,7 @@ const ProductCard = ({
   name,
   description,
   slug,
-  category
+  category,
 }: Product) => {
   return (
     <div className="flex flex-col items-center *:text-center md:*:text-left lg:flex-row lg:gap-[8rem] lg:even:flex-row-reverse">

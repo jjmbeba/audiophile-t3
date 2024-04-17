@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Category } from "./Categories";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { ChevronRight } from "lucide-react";
 import { useSidebarStore } from "~/store/sidebarStore";
 

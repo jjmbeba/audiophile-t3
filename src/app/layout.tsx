@@ -12,6 +12,8 @@ import Navbar from "./_components/common/navbar/Navbar";
 import { Toaster } from "~/components/ui/sonner";
 import CartProvider from "~/providers/CartProvider";
 
+import { ViewTransitions } from "next-view-transitions";
+
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -38,21 +40,23 @@ export default function RootLayout({
         baseTheme: dark,
       }}
     >
-      <html lang="en">
-        <body className={`font-sans ${manrope.variable} h-screen`}>
-          <TRPCReactProvider>
-            <CartProvider>
-              <Navbar />
-              <div className="bg-black">
-                <Separator className="bg-[#1b1b1b] md:mx-6 lg:mx-[10.3125rem]" />
-              </div>
-              {children}
-              <Toaster richColors />
-              <Footer />
-            </CartProvider>
-          </TRPCReactProvider>
-        </body>
-      </html>
+      <ViewTransitions>
+        <html lang="en">
+          <body className={`font-sans ${manrope.variable} h-screen`}>
+            <TRPCReactProvider>
+              <CartProvider>
+                <Navbar />
+                <div className="bg-black">
+                  <Separator className="bg-[#1b1b1b] md:mx-6 lg:mx-[10.3125rem]" />
+                </div>
+                {children}
+                <Toaster richColors />
+                <Footer />
+              </CartProvider>
+            </TRPCReactProvider>
+          </body>
+        </html>
+      </ViewTransitions>
     </ClerkProvider>
   );
 }

@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "next-view-transitions";
+import { usePathname } from "next/navigation";
 import React from "react";
 import { cn } from "~/lib/utils";
-import { usePathname, useRouter } from "next/navigation";
 
 type Props = React.HTMLAttributes<HTMLDivElement>;
 
@@ -43,7 +43,7 @@ const NavLinks = ({ className, ...props }: Props) => {
 type NavLink = {
   text: string;
   link: string;
-  exact:boolean;
+  exact: boolean;
 };
 
 const NavLink = ({ text, link, exact }: NavLink) => {

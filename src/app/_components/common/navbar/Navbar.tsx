@@ -1,10 +1,16 @@
-import { ClerkLoading, SignInButton, SignUpButton, UserButton, currentUser } from "@clerk/nextjs";
+import {
+  ClerkLoading,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+  currentUser,
+} from "@clerk/nextjs";
 import Logo from "../Logo";
 import NavLinks from "../NavLinks";
 import Cart from "./Cart";
 import MobileMenu from "./MobileMenu";
 import User from "./User";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Button } from "~/components/ui/button";
 import { MoveRight } from "lucide-react";
 import { Skeleton } from "~/components/ui/skeleton";
@@ -20,7 +26,7 @@ const Navbar = async () => {
       {user?.id ? (
         <div className="flex items-center gap-4">
           <Cart />
-          <div className="w-8 h-8">
+          <div className="h-8 w-8">
             <ClerkLoading>
               <Skeleton className="h-8 w-8 rounded-full bg-gray-700" />
             </ClerkLoading>

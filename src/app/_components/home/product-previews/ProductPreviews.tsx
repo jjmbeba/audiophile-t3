@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import React, { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 
@@ -44,7 +44,7 @@ const ProductPreviews = () => {
 export default ProductPreviews;
 const ZX9SpeakerPreview = ({ screen }: { screen: string }) => {
   return (
-    <div className="flex flex-col items-center rounded-[0.5rem] bg-primary pb-[3.4375rem] lg:pb-0 lg:flex-row lg:justify-center lg:gap-[9.4375rem]">
+    <div className="flex flex-col items-center rounded-[0.5rem] bg-primary pb-[3.4375rem] lg:flex-row lg:justify-center lg:gap-[9.4375rem] lg:pb-0">
       <Image
         src={`/home/${screen}/image-speaker-zx9.png`}
         width={172.25}
