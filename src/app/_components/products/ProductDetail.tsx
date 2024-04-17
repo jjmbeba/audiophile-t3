@@ -63,6 +63,7 @@ const ProductDetailCard = ({
   relatedImages,
   shortName,
   seeMoreLinks,
+  stripe_price_id
 }: Product & {
   accessories: ProductAccessory[];
   seeMoreLinks: ProductRecommendation[];
@@ -92,6 +93,7 @@ const ProductDetailCard = ({
             price={price}
             image={images.mobile}
             shortName={shortName}
+            stripe_price_id={stripe_price_id}
           />
         </div>
       </div>

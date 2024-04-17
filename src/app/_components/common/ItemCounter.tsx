@@ -11,9 +11,10 @@ type Props = {
   image: string;
   id: number;
   shortName: string;
+  stripe_price_id:string | null;
 };
 
-const ItemCounter = ({ id, image, name, price, shortName }: Props) => {
+const ItemCounter = ({ id, image, name, price, shortName, stripe_price_id }: Props) => {
   const [count, setCount] = useState(1);
 
   const { addItem } = useShoppingCart();
@@ -44,7 +45,7 @@ const ItemCounter = ({ id, image, name, price, shortName }: Props) => {
           addItem(
             {
               name,
-              id: "price_1P621JDEPSRRihmXXMcLMkrj",
+              id: stripe_price_id!,
               price,
               image,
               currency: "USD",

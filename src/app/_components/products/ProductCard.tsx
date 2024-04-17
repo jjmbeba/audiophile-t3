@@ -24,8 +24,7 @@ const ProductCard = ({
   name,
   description,
   slug,
-  category,
-  relatedImages
+  category
 }: Product) => {
   return (
     <div className="flex flex-col items-center *:text-center md:*:text-left lg:flex-row lg:gap-[8rem] lg:even:flex-row-reverse">
