@@ -1,3 +1,4 @@
+import ThankYouModal from "./_components/checkout/ThankYouMessage";
 import Categories from "./_components/home/categories/Categories";
 import CTA from "./_components/home/cta/CTA";
 import Hero from "./_components/home/hero/Hero";
@@ -10,6 +11,7 @@ export default function Home() {
       <Categories />
       <ProductPreviews />
       <CTA />
+      <ThankYouModal />
     </main>
   );
 }

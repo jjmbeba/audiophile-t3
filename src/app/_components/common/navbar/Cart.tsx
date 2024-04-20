@@ -38,8 +38,13 @@ const Cart = () => {
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger className="flex items-end">
         <ShoppingCart className="h-6 w-6" />
+        {cartCount! > 0 && (
+          <div className="flex h-3 w-3 items-center justify-center rounded-[0.25rem] bg-white p-1 text-[0.65rem] font-bold text-black">
+            {cartCount}
+          </div>
+        )}
       </DialogTrigger>
       <DialogContent className="max-w-[20.4375rem] rounded-[0.5rem] md:max-w-[29.5625rem]">
         <DialogHeader>

@@ -10,7 +10,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       mode="payment"
       cartMode="client-only"
       stripe={env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
-      successUrl="http://localhost:3000"
+      successUrl="http://localhost:3000?status=success"
       cancelUrl="http://localhost:3000/nowosci"
       currency="USD"
       billingAddressCollection={true}

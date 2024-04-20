@@ -13,6 +13,7 @@ export default authMiddleware({
     "/headphones/:id",
     "/speakers",
     "/speakers/:id",
+    "/api/v1/stripe"
   ],
   // Prevent the specified routes from accessing
   // authentication information:

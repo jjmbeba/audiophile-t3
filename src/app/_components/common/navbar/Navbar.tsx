@@ -1,19 +1,17 @@
 import {
   ClerkLoading,
-  SignInButton,
   SignUpButton,
   UserButton,
-  currentUser,
+  currentUser
 } from "@clerk/nextjs";
+import { MoveRight } from "lucide-react";
+import { Button } from "~/components/ui/button";
+import { Skeleton } from "~/components/ui/skeleton";
 import Logo from "../Logo";
 import NavLinks from "../NavLinks";
 import Cart from "./Cart";
 import MobileMenu from "./MobileMenu";
 import User from "./User";
-import { Link } from "next-view-transitions";
-import { Button } from "~/components/ui/button";
-import { MoveRight } from "lucide-react";
-import { Skeleton } from "~/components/ui/skeleton";
 
 const Navbar = async () => {
   const user = await currentUser();

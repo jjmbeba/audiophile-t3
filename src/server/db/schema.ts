@@ -37,7 +37,7 @@ export const products = createTable(
     relatedImages: json("relatedImages"),
     categoryImages: json("categoryImages").notNull(),
     shortName: text("shortName").notNull().default(""),
-    stripe_price_id:text('stripe_price_id'),
+    stripe_price_id: text("stripe_price_id"),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
@@ -98,9 +98,50 @@ export const recommendations = createTable("recommendation", {
   secondaryProductID: serial("secondaryProductID").notNull(),
 });
 
+export const orders = createTable("orders", {
+  id: serial("id").primaryKey(),
+  user_id: text("user_id").notNull().unique(),
+  createdAt: timestamp("created_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  totalAmount: integer("totalAmount").notNull(),
+  paymentStatus: text("paymentStatus").notNull(),
+});
+
+export const ordersProducts = createTable("ordersProducts", {
+  id: serial("id").primaryKey(),
+  orderID: integer("orderID").references(() => orders.id, {
+    onDelete: "no action",
+    onUpdate: "no action",
+  }),
+  productID: integer("productID").references(() => products.id, {
+    onDelete: "no action",
+    onUpdate: "no action",
+  }),
+  createdAt: timestamp("created_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+});
+
+export const ordersProductsRelations = relations(ordersProducts, ({ one }) => ({
+  product: one(products, {
+    fields: [ordersProducts.productID],
+    references: [products.id],
+  }),
+  order:one(orders, {
+    fields:[ordersProducts.orderID],
+    references:[orders.id]
+  })
+}));
+
 export const productRelations = relations(products, ({ many }) => ({
   accessories: many(accessories),
   seeMoreLinks: many(recommendations),
+  ordersProducts: many(ordersProducts),
+}));
+
+export const ordersRelations = relations(orders, ({ many }) => ({
+  ordersProducts:many(ordersProducts)
 }));
 
 export const accessoriesRelations = relations(accessories, ({ one }) => ({
